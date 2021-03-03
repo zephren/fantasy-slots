@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fa66959e.chunk.css",
+    "main.js": "/static/js/main.cc1c2fc5.chunk.js",
+    "main.js.map": "/static/js/main.cc1c2fc5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.efdf3fb0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.efdf3fb0.js.map",
+    "static/js/2.df389bb4.chunk.js": "/static/js/2.df389bb4.chunk.js",
+    "static/js/2.df389bb4.chunk.js.map": "/static/js/2.df389bb4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.fa66959e.chunk.css.map": "/static/css/main.fa66959e.chunk.css.map",
+    "static/js/2.df389bb4.chunk.js.LICENSE.txt": "/static/js/2.df389bb4.chunk.js.LICENSE.txt",
+    "static/media/chest1.b4054229.png": "/static/media/chest1.b4054229.png",
+    "static/media/chest2.d4ed67d0.png": "/static/media/chest2.d4ed67d0.png",
+    "static/media/chest3.888bf5be.png": "/static/media/chest3.888bf5be.png",
+    "static/media/chest4.28dffa1b.png": "/static/media/chest4.28dffa1b.png",
+    "static/media/coal.d3a30adc.png": "/static/media/coal.d3a30adc.png",
+    "static/media/coin.3480412c.png": "/static/media/coin.3480412c.png",
+    "static/media/dagger1.6892c2d5.png": "/static/media/dagger1.6892c2d5.png",
+    "static/media/key.0629d73b.png": "/static/media/key.0629d73b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.efdf3fb0.js",
+    "static/js/2.df389bb4.chunk.js",
+    "static/css/main.fa66959e.chunk.css",
+    "static/js/main.cc1c2fc5.chunk.js"
+  ]
+}
