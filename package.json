@@ -49,5 +49,5 @@
   "devDependencies": {
     "@types/uuid": "^8.3.0"
   },
-  "homepage": "http://zephren.github.io/fantasy-slots"
+  "homepage": "https://zephren.github.io/fantasy-slots"
 }
