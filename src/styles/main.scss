@@ -1,0 +1,94 @@
+* {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  user-drag: none;
+}
+
+body {
+  background: #333;
+}
+
+.tile {
+  position: relative;
+  background: #111;
+  width: 5em;
+  height: 5em;
+
+  &.highlight {
+    background: #333;
+  }
+
+  .icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .value {
+    position: absolute;
+    background: rgba(0, 255, 0, 0.5);
+    top: 0em;
+    right: 0em;
+    padding: 0em 0.25em;
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 1.2em;
+    z-index: 1;
+  }
+}
+
+.tile-details {
+  position: relative;
+  background: #111;
+  width: 15em;
+  padding: 1em;
+
+  .name {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  .icon {
+    width: 100%;
+  }
+
+  .description {
+    font-size: 1.5em;
+
+    .icon {
+      width: 1em;
+    }
+  }
+}
+
+.board {
+  display: grid;
+  column-gap: 0.5em;
+  row-gap: 0em;
+  /* tamplates filled out by the component */
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 5em);
+  column-gap: 0.5em;
+  row-gap: 0.5em;
+}
+
+.pick-a-tile {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 17em);
+  column-gap: 0.5em;
+  row-gap: 0.5em;
+}
+
+button {
+  color: #000;
+  background: #fff;
+  border: 0em;
+  font-size: 2em;
+  cursor: pointer;
+}
