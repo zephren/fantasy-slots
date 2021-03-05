@@ -5,10 +5,11 @@ import { createTile } from "./createTile";
 import { randomInt } from "./utils";
 import { store } from "./store";
 import { saveGameData } from "./saveGameData";
+import { taxPeriods } from "../config/taxPeriods";
 
 export function findTile(tiles: TileInstance[], id: string) {
   return tiles.find((tile) => {
-    return tile.configId === id;
+    return tile.config.id === id;
   });
 }
 
@@ -44,7 +45,7 @@ export function addGameTile(newTile: TileInstance) {
   const emptyTileIndex = gameTiles.findIndex((tile) => {
     return tile.config.id === emptyTileConfig.id;
   });
-  console.log(emptyTileIndex);
+
   if (emptyTileIndex >= 0) {
     gameTiles.splice(emptyTileIndex, 1, newTile);
   } else {
@@ -156,12 +157,16 @@ export function spin() {
     }
 
     if (index > gridWidth * gridHeight) {
+      // Spin finished
+
       clearInterval(interval);
 
       store.state.spinning = false;
       store.state.gameData.totalCoins += store.state.gameData.boardValue;
       store.state.tilesToPick = pickTiles(deckTiles);
       store.update();
+
+      nextTaxPeriodDay();
 
       saveGameData();
 
@@ -178,8 +183,9 @@ export function spin() {
     index++;
 
     let boardValue = 0;
-    for (const index of boardTiles) {
-      boardValue += gameTiles[boardTiles[index]].data.spinValue;
+
+    for (const boardTilesIndex of boardTiles) {
+      boardValue += gameTiles[boardTilesIndex].data.spinValue;
     }
     store.state.gameData.boardValue = boardValue;
 
@@ -281,8 +287,6 @@ export function calculateBoardTileValue(tile: TileInstance, index: number) {
   const { gameData } = store.state;
   const { gridWidth, gridHeight } = gameData;
 
-  console.log("Tile Index", index);
-
   const context = {
     tile,
     gameData,
@@ -309,4 +313,23 @@ function pickTiles(tiles: TileInstance[], count = 3) {
   }
 
   return pickedTiles;
+}
+
+export function nextTaxPeriodDay() {
+  const { gameData } = store.state;
+  const taxPeriod = taxPeriods[gameData.currentTaxPeriod];
+
+  gameData.currentTaxPeriodDay++;
+
+  if (gameData.currentTaxPeriodDay >= taxPeriod.totalDays) {
+    gameData.currentTaxPeriod++;
+    gameData.currentTaxPeriodDay = 1;
+    gameData.totalCoins -= taxPeriod.taxAmount;
+
+    if (gameData.totalCoins < 0) {
+      gameData.roundEnded = true;
+    }
+  }
+
+  store.update();
 }

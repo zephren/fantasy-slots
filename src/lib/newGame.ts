@@ -4,6 +4,7 @@ import {
   addDeckTile,
   addOwnedTile,
   buildDeck,
+  nextTaxPeriodDay,
   setInitialGameTiles,
 } from "./game";
 import { store } from "./store";
@@ -25,6 +26,9 @@ export function newGame() {
     gridHeight: 3,
     boardValue: 0,
     totalCoins: 0,
+    currentTaxPeriod: 0,
+    currentTaxPeriodDay: 0,
+    roundEnded: false,
   };
 
   store.state.gameData = gameData;
@@ -38,4 +42,6 @@ export function newGame() {
   buildDeck();
 
   setInitialGameTiles();
+
+  nextTaxPeriodDay();
 }

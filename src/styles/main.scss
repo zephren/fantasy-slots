@@ -92,3 +92,11 @@ button {
   font-size: 2em;
   cursor: pointer;
 }
+
+.icon-em {
+  .icon {
+    vertical-align: bottom;
+    font-size: inherit;
+    width: 1em;
+  }
+}

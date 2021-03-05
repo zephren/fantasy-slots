@@ -1,4 +1,8 @@
+import { GameData } from "../types/GameData";
+import { TileInstance } from "../types/TileInstance";
 import { GAME_ID } from "./static";
+import { store } from "./store";
+import tileConfigs, { emptyTileConfig } from "../tiles";
 
 export function loadGameData() {
   let localData = localStorage[`${GAME_ID}`];
@@ -11,6 +15,21 @@ export function loadGameData() {
 
   if (localData?.gameState) {
     // Must update configs with references to the actual objects
-    // store.state.gameData = localData.gameState;
+    const gameState: GameData = localData.gameState;
+
+    updateTileConfigs(gameState.ownedTiles);
+    updateTileConfigs(gameState.deckTiles);
+    updateTileConfigs(gameState.gameTiles);
+
+    store.state.gameData = localData.gameState;
+  }
+}
+
+function updateTileConfigs(tiles: TileInstance[]) {
+  for (const tile of tiles) {
+    tile.config =
+      tileConfigs.find((tileConfig) => {
+        return tileConfig.id === tile.config.id;
+      }) || emptyTileConfig;
   }
 }

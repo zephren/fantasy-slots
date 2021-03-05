@@ -19,7 +19,6 @@ export function createTile(
 ) {
   const tile: TileInstance = {
     id: uuid(),
-    configId: tileConfig.id,
     config: tileConfig,
     effects: {},
     data,

@@ -13,7 +13,6 @@ export type TileEffects = {
 
 export type TileInstance = {
   id: string;
-  configId: string;
   config: TileConfig;
   data: TileData;
   effects: TileEffects;

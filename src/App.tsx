@@ -8,8 +8,33 @@ import { PickNewTile } from "./components/PickNewTile";
 import { TileDetails } from "./components/TileDetails";
 import { Upgrades } from "./components/Upgrades";
 import { loadGameData } from "./lib/loadGameData";
+import { taxPeriods } from "./config/taxPeriods";
+import { Coin } from "./tiles/icons/Icon";
+import { newRound } from "./lib/newRound";
 
 loadGameData();
+
+function Header() {
+  const { gameData } = store.state;
+  const taxPeriod = taxPeriods[gameData.currentTaxPeriod];
+
+  return (
+    <>
+      <div style={{ fontSize: "3em" }}>
+        {gameData.totalCoins}
+        <span className="icon-em">
+          <Coin />
+        </span>{" "}
+        / {taxPeriod.taxAmount}
+        <span className="icon-em">
+          <Coin />
+        </span>{" "}
+        taxes due in {taxPeriod.totalDays - gameData.currentTaxPeriodDay} Days
+      </div>
+      <div style={{ fontSize: "3em" }}></div>
+    </>
+  );
+}
 
 function App() {
   const update = useState(0)[1];
@@ -34,9 +59,18 @@ function App() {
     );
   }
 
+  if (gameData.roundEnded) {
+    return (
+      <div>
+        THE ROUND IS OVER
+        <button onClick={newRound}>Next round</button>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
-      <div style={{ fontSize: "3em" }}>{gameData.totalCoins} Coins</div>
+      <Header />
       {!!tilesToPick.length && (
         <div>
           <h1>Pick New Tile</h1>

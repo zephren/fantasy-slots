@@ -9,6 +9,7 @@ export function PickNewTile() {
     <div className="pick-a-tile">
       {tilesToPick.map((tile) => (
         <TileDetails
+          key={tile.id}
           tile={tile}
           onClick={() => {
             addGameTile(tile);
