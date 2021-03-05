@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fantasy-slots/static/css/main.fa66959e.chunk.css",
-    "main.js": "/fantasy-slots/static/js/main.cc1c2fc5.chunk.js",
-    "main.js.map": "/fantasy-slots/static/js/main.cc1c2fc5.chunk.js.map",
+    "main.css": "/fantasy-slots/static/css/main.bd42ba24.chunk.css",
+    "main.js": "/fantasy-slots/static/js/main.dddd2d5b.chunk.js",
+    "main.js.map": "/fantasy-slots/static/js/main.dddd2d5b.chunk.js.map",
     "runtime-main.js": "/fantasy-slots/static/js/runtime-main.4a361c43.js",
     "runtime-main.js.map": "/fantasy-slots/static/js/runtime-main.4a361c43.js.map",
-    "static/js/2.df389bb4.chunk.js": "/fantasy-slots/static/js/2.df389bb4.chunk.js",
-    "static/js/2.df389bb4.chunk.js.map": "/fantasy-slots/static/js/2.df389bb4.chunk.js.map",
+    "static/js/2.7fd50f5a.chunk.js": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js",
+    "static/js/2.7fd50f5a.chunk.js.map": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js.map",
     "index.html": "/fantasy-slots/index.html",
-    "static/css/main.fa66959e.chunk.css.map": "/fantasy-slots/static/css/main.fa66959e.chunk.css.map",
-    "static/js/2.df389bb4.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.df389bb4.chunk.js.LICENSE.txt",
+    "static/css/main.bd42ba24.chunk.css.map": "/fantasy-slots/static/css/main.bd42ba24.chunk.css.map",
+    "static/js/2.7fd50f5a.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js.LICENSE.txt",
     "static/media/chest1.b4054229.png": "/fantasy-slots/static/media/chest1.b4054229.png",
     "static/media/chest2.d4ed67d0.png": "/fantasy-slots/static/media/chest2.d4ed67d0.png",
     "static/media/chest3.888bf5be.png": "/fantasy-slots/static/media/chest3.888bf5be.png",
@@ -21,8 +21,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.4a361c43.js",
-    "static/js/2.df389bb4.chunk.js",
-    "static/css/main.fa66959e.chunk.css",
-    "static/js/main.cc1c2fc5.chunk.js"
+    "static/js/2.7fd50f5a.chunk.js",
+    "static/css/main.bd42ba24.chunk.css",
+    "static/js/main.dddd2d5b.chunk.js"
   ]
 }
