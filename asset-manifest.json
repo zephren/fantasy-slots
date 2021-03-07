@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fantasy-slots/static/css/main.bd42ba24.chunk.css",
-    "main.js": "/fantasy-slots/static/js/main.dddd2d5b.chunk.js",
-    "main.js.map": "/fantasy-slots/static/js/main.dddd2d5b.chunk.js.map",
+    "main.css": "/fantasy-slots/static/css/main.1182f5ef.chunk.css",
+    "main.js": "/fantasy-slots/static/js/main.141e0a1a.chunk.js",
+    "main.js.map": "/fantasy-slots/static/js/main.141e0a1a.chunk.js.map",
     "runtime-main.js": "/fantasy-slots/static/js/runtime-main.4a361c43.js",
     "runtime-main.js.map": "/fantasy-slots/static/js/runtime-main.4a361c43.js.map",
-    "static/js/2.7fd50f5a.chunk.js": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js",
-    "static/js/2.7fd50f5a.chunk.js.map": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js.map",
+    "static/js/2.d29b88f6.chunk.js": "/fantasy-slots/static/js/2.d29b88f6.chunk.js",
+    "static/js/2.d29b88f6.chunk.js.map": "/fantasy-slots/static/js/2.d29b88f6.chunk.js.map",
     "index.html": "/fantasy-slots/index.html",
-    "static/css/main.bd42ba24.chunk.css.map": "/fantasy-slots/static/css/main.bd42ba24.chunk.css.map",
-    "static/js/2.7fd50f5a.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.7fd50f5a.chunk.js.LICENSE.txt",
+    "static/css/main.1182f5ef.chunk.css.map": "/fantasy-slots/static/css/main.1182f5ef.chunk.css.map",
+    "static/js/2.d29b88f6.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.d29b88f6.chunk.js.LICENSE.txt",
     "static/media/chest1.b4054229.png": "/fantasy-slots/static/media/chest1.b4054229.png",
     "static/media/chest2.d4ed67d0.png": "/fantasy-slots/static/media/chest2.d4ed67d0.png",
     "static/media/chest3.888bf5be.png": "/fantasy-slots/static/media/chest3.888bf5be.png",
@@ -17,12 +17,14 @@
     "static/media/coal.d3a30adc.png": "/fantasy-slots/static/media/coal.d3a30adc.png",
     "static/media/coin.3480412c.png": "/fantasy-slots/static/media/coin.3480412c.png",
     "static/media/dagger1.6892c2d5.png": "/fantasy-slots/static/media/dagger1.6892c2d5.png",
-    "static/media/key.0629d73b.png": "/fantasy-slots/static/media/key.0629d73b.png"
+    "static/media/key.0629d73b.png": "/fantasy-slots/static/media/key.0629d73b.png",
+    "static/media/pickaxe.9f91b8f2.png": "/fantasy-slots/static/media/pickaxe.9f91b8f2.png",
+    "static/media/rock.14a2b8aa.png": "/fantasy-slots/static/media/rock.14a2b8aa.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4a361c43.js",
-    "static/js/2.7fd50f5a.chunk.js",
-    "static/css/main.bd42ba24.chunk.css",
-    "static/js/main.dddd2d5b.chunk.js"
+    "static/js/2.d29b88f6.chunk.js",
+    "static/css/main.1182f5ef.chunk.css",
+    "static/js/main.141e0a1a.chunk.js"
   ]
 }
