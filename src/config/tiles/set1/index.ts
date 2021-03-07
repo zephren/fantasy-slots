@@ -1,6 +1,6 @@
-import { TileConfig } from "../../types/TileConfig";
-import { TileInstance } from "../../types/TileInstance";
-import { TileValueContext } from "../../types/TileValueContext";
+import { TileConfig } from "../../../types/TileConfig";
+import { TileInstance } from "../../../types/TileInstance";
+import { TileValueContext } from "../../../types/TileValueContext";
 import { Coal, Coin, Dagger1 } from "../icons/Icon";
 import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
 import { rarity } from "../rarities";

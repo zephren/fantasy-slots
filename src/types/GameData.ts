@@ -1,5 +1,10 @@
 import { TileInstance } from "./TileInstance";
 
+export type GameEvent = {
+  id: string;
+  message: string;
+};
+
 export type GameData = {
   boardTiles: number[]; // Indexes of the game tile
   ownedTiles: TileInstance[]; // All tiles owned by playing the game (unique)
@@ -13,4 +18,5 @@ export type GameData = {
   currentTaxPeriod: number;
   currentTaxPeriodDay: number;
   roundEnded: boolean;
+  events: GameEvent[];
 };

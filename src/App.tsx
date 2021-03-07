@@ -3,14 +3,19 @@ import { Inventory } from "./components/Inventory";
 import { store } from "./lib/store";
 import { useEffect, useState } from "react";
 import { newGame } from "./lib/newGame";
-import { spin } from "./lib/game";
+import { calculateDeckScore, spin } from "./lib/game";
 import { PickNewTile } from "./components/PickNewTile";
 import { TileDetails } from "./components/TileDetails";
 import { Upgrades } from "./components/Upgrades";
 import { loadGameData } from "./lib/loadGameData";
 import { taxPeriods } from "./config/taxPeriods";
-import { Coin } from "./tiles/icons/Icon";
+import { Coin } from "./config/tiles/icons/Icon";
 import { newRound } from "./lib/newRound";
+import { GameEvents } from "./components/GameEvents";
+import { saveGameData } from "./lib/saveGameData";
+import { tileInstances } from "./config/tiles";
+import { createTile } from "./lib/createTile";
+import packageJson from "../package.json";
 
 loadGameData();
 
@@ -68,8 +73,11 @@ function App() {
     );
   }
 
+  const deckScore = calculateDeckScore();
+
   return (
     <div className="app">
+      <div>Version: {packageJson.version}</div>
       <Header />
       {!!tilesToPick.length && (
         <div>
@@ -96,13 +104,12 @@ function App() {
           <div style={{ width: "1em" }}></div>
           <div>
             <h1>Selected Tile</h1>
-            <TileDetails
-              tile={store.state.selectedTile}
-              onClick={() => {
-                store.state.selectedTile = undefined;
-                store.update();
-              }}
-            />
+            <TileDetails tile={store.state.selectedTile} />
+          </div>
+          <div style={{ width: "1em" }}></div>
+          <div>
+            <h1>Events</h1>
+            <GameEvents events={gameData.events} />
           </div>
         </div>
         <div>
@@ -111,11 +118,49 @@ function App() {
         </div>
         <div>
           <h1>Deck</h1>
-          <Inventory tiles={gameData.deckTiles} />
+          <div style={{ background: deckScore > 1 ? "red" : "none" }}>
+            Deck Score: {deckScore.toFixed(2)}
+          </div>
+          <Inventory
+            tiles={gameData.deckTiles}
+            onClickTile={(tile) => {
+              const index = gameData.deckTiles.indexOf(tile);
+
+              if (index >= 0) {
+                gameData.deckTiles.splice(index, 1);
+              }
+            }}
+          />
         </div>
         <div>
           <h1>Owned Inventory</h1>
-          <Inventory tiles={gameData.ownedTiles} />
+          <Inventory
+            tiles={gameData.ownedTiles}
+            onClickTile={(tile) => {
+              const hasTile = gameData.deckTiles.find((otherTile) => {
+                return otherTile.config.id === tile.config.id;
+              });
+
+              if (!hasTile) {
+                gameData.deckTiles.push(tile);
+              }
+            }}
+          />
+        </div>
+        <div>
+          <h1>All Tiles</h1>
+          <Inventory
+            tiles={tileInstances}
+            onClickTile={(tile) => {
+              const hasTile = gameData.ownedTiles.find((otherTile) => {
+                return otherTile.config.id === tile.config.id;
+              });
+
+              if (!hasTile) {
+                gameData.ownedTiles.push(createTile(tile.config));
+              }
+            }}
+          />
         </div>
         <div>
           <h1>Upgrades</h1>
@@ -128,6 +173,13 @@ function App() {
           }}
         >
           Reset all game data
+        </button>
+        <button
+          onClick={() => {
+            saveGameData();
+          }}
+        >
+          Save game data
         </button>
       </div>
     </div>

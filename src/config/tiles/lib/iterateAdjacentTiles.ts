@@ -1,4 +1,4 @@
-import { TileValueContext } from "../../types/TileValueContext";
+import { TileValueContext } from "../../../types/TileValueContext";
 
 export function iterateAdjacentTiles(context: TileValueContext, callback: any) {
   const adjecentIndexes = context.getAdjacentIndexes();

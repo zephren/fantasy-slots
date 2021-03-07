@@ -1,11 +1,12 @@
-import { emptyTileConfig } from "../tiles";
-import { rarity } from "../tiles/rarities";
+import { emptyTileConfig } from "../config/tiles";
+import { maxRarity, rarity } from "../config/tiles/rarities";
 import { TileInstance } from "../types/TileInstance";
 import { createTile } from "./createTile";
 import { randomInt } from "./utils";
 import { store } from "./store";
 import { saveGameData } from "./saveGameData";
 import { taxPeriods } from "../config/taxPeriods";
+import { v4 as uuid } from "uuid";
 
 export function findTile(tiles: TileInstance[], id: string) {
   return tiles.find((tile) => {
@@ -299,17 +300,49 @@ export function calculateBoardTileValue(tile: TileInstance, index: number) {
   return tile.config.calculateValue(context);
 }
 
+function getTileChances(tiles: TileInstance[]) {
+  const chances: number[] = [];
+  let chanceTotal = 0;
+
+  for (const tile of tiles) {
+    // The higher the rarity, the lower the chance
+    chanceTotal += maxRarity + 1 - tile.config.rarity;
+    chances.push(chanceTotal);
+  }
+
+  return { chances, chanceTotal };
+}
+
 function pickTiles(tiles: TileInstance[], count = 3) {
   const availableTiles = [...tiles];
   const pickedTiles = [];
-
+  console.log("Picking tiles");
   for (let i = 0; i < count; i++) {
-    const index = randomInt(0, availableTiles.length - 1);
+    const { chances, chanceTotal } = getTileChances(availableTiles);
+
+    const rand = randomInt(0, chanceTotal);
+
+    const index = chances.findIndex((chance) => {
+      return chance >= rand;
+    });
+    console.log({
+      chances,
+      chanceTotal,
+      rand,
+      index,
+    });
     const tile = availableTiles.splice(index, 1)[0];
 
     if (tile) {
       pickedTiles.push(createTile(tile.config));
     }
+
+    // const index = randomInt(0, availableTiles.length - 1);
+    // const tile = availableTiles.splice(index, 1)[0];
+
+    // if (tile) {
+    //   pickedTiles.push(createTile(tile.config));
+    // }
   }
 
   return pickedTiles;
@@ -332,4 +365,26 @@ export function nextTaxPeriodDay() {
   }
 
   store.update();
+}
+
+export function addGameEvent({ message = "" }: any) {
+  const { gameData } = store.state;
+
+  gameData.events.push({
+    id: uuid(),
+    message,
+  });
+
+  console.log(`GAME EVENT: ${message}`);
+}
+
+export function calculateDeckScore() {
+  const { gameData } = store.state;
+  let score = 0;
+
+  for (const tile of gameData.deckTiles) {
+    score += tile.config.rarity;
+  }
+
+  return score / gameData.deckTiles.length;
 }

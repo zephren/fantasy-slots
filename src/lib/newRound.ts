@@ -1,4 +1,4 @@
-import { setInitialGameTiles } from "./game";
+import { nextTaxPeriodDay, setInitialGameTiles } from "./game";
 import { store } from "./store";
 
 export function newRound() {
@@ -11,6 +11,7 @@ export function newRound() {
   gameData.totalCoins = 0;
 
   setInitialGameTiles();
+  nextTaxPeriodDay();
 
   store.state.tilesToPick = [];
 

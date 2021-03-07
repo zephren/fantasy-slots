@@ -1,6 +1,7 @@
 import { TileConfig } from "../types/TileConfig";
-import { TileData, TileInstance } from "../types/TileInstance";
+import { TileData, TileInstance, TileMeta } from "../types/TileInstance";
 import { v4 as uuid } from "uuid";
+import { emptyTileConfig } from "../config/tiles";
 
 export function createTileData() {
   const tileData: TileData = {
@@ -13,15 +14,26 @@ export function createTileData() {
   return tileData;
 }
 
-export function createTile(
-  tileConfig: TileConfig,
-  data: TileData = createTileData()
-) {
+export function createTile(tileConfig?: TileConfig, meta?: TileMeta) {
+  if (!tileConfig) {
+    console.error(
+      new Error(
+        "Undefined tile config for creating a tile. Adding an empty tile."
+      )
+    );
+    tileConfig = emptyTileConfig;
+  }
+
+  if (!meta && tileConfig.createMeta) {
+    meta = tileConfig.createMeta();
+  }
+
   const tile: TileInstance = {
     id: uuid(),
     config: tileConfig,
     effects: {},
-    data,
+    data: createTileData(),
+    meta: meta ?? {},
   };
 
   return tile;

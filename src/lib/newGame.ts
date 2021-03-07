@@ -1,4 +1,4 @@
-import { tilesByName } from "../tiles";
+import { getTileConfigByName } from "../config/tiles";
 import { GameData } from "../types/GameData";
 import {
   addDeckTile,
@@ -10,7 +10,7 @@ import {
 import { store } from "./store";
 
 function addTile(name: string) {
-  const tileConfig = tilesByName.get(name);
+  const tileConfig = getTileConfigByName(name);
   addOwnedTile(tileConfig);
   addDeckTile(tileConfig?.id);
 }
@@ -29,19 +29,20 @@ export function newGame() {
     currentTaxPeriod: 0,
     currentTaxPeriodDay: 0,
     roundEnded: false,
+    events: [],
   };
 
   store.state.gameData = gameData;
 
   addTile("Coal");
   addTile("Dagger");
-  addTile("Key");
-  addTile("Small Chest");
-  addTile("Medium Chest");
+  addTile("Pickaxe");
+  addTile("Rock");
+  // addTile("Key");
+  // addTile("Small Chest");
+  // addTile("Medium Chest");
 
   buildDeck();
-
   setInitialGameTiles();
-
   nextTaxPeriodDay();
 }

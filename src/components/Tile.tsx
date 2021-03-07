@@ -4,7 +4,7 @@ import { TileInstance } from "../types/TileInstance";
 interface Props {
   tile: TileInstance;
   showValue?: boolean;
-  onClick?: () => void;
+  onClick?: (tile: TileInstance) => void;
 }
 
 export function Tile({ tile, showValue, onClick }: Props) {
@@ -19,12 +19,15 @@ export function Tile({ tile, showValue, onClick }: Props) {
     store.update();
 
     if (onClick) {
-      onClick();
+      onClick(tile);
     }
   }
 
   return (
     <div className={className.join(" ")} onClick={clickedTile}>
+      {!!tile.config.topStat && showValue && (
+        <div className="top-stat">{tile.config.topStat(tile)}</div>
+      )}
       {!!tile.data.spinValue && showValue && (
         <div className="value">{tile.data.spinValue}</div>
       )}

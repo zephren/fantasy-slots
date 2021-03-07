@@ -1,4 +1,10 @@
+import { TileInstance, TileMeta } from "./TileInstance";
 import { TileValueContext } from "./TileValueContext";
+
+export type RemoveValue = {
+  value?: number;
+  tiles?: TileInstance[];
+};
 
 export type TileConfig = {
   id: string;
@@ -8,5 +14,7 @@ export type TileConfig = {
   rarity: number;
   categories: string[];
   calculateValue: (context: TileValueContext) => number;
-  onDestroy?: (context: TileValueContext) => number | void;
+  onRemove?: (context: TileValueContext) => RemoveValue | void;
+  createMeta?: () => TileMeta;
+  topStat?: (tile: TileInstance) => number;
 };

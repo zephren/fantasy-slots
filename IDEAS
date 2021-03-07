@@ -4,4 +4,21 @@ Theme: craft items to sell to customers, to earn money, to pay taxes
 
 
 start with small board
-  upgrades to expand the board (can customize size if it gets too big)
+  upgrades to expand the board (can customize size if it gets too big, but only at the beginning of a round)
+
+tiles can have their own stats
+  ex combining potions creates new potions that have some combination of the stats
+
+
+
+
+TILE IDEAS
+
+Crates, give mulitple tiles (BasAndBoxesIcons)
+* Different rarities
+* Require something to open them (hammer?)
+
+Infinite pickaxe
+* Legendary
+* Does not break
+* It give value based on the number of tiles removed

@@ -1,4 +1,3 @@
-import { TileInstance } from "../types/TileInstance";
 import { GAME_ID } from "./static";
 import { store } from "./store";
 
@@ -19,6 +18,7 @@ export function saveGameData() {
   replaceTileConfigs(gameState.gameTiles);
 
   localData.gameState = gameState;
+  localData.saveDate = new Date();
 
   localStorage[`${GAME_ID}`] = JSON.stringify(localData);
 }

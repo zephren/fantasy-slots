@@ -1,5 +1,5 @@
 import { createTile } from "../lib/createTile";
-import { emptyTileConfig } from "../tiles";
+import { emptyTileConfig } from "../config/tiles";
 import { TileInstance } from "../types/TileInstance";
 import { Tile } from "./Tile";
 

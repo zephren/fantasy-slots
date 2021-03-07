@@ -2,7 +2,7 @@ import { GameData } from "../types/GameData";
 import { TileInstance } from "../types/TileInstance";
 import { GAME_ID } from "./static";
 import { store } from "./store";
-import tileConfigs, { emptyTileConfig } from "../tiles";
+import tileConfigs, { emptyTileConfig } from "../config/tiles";
 
 export function loadGameData() {
   let localData = localStorage[`${GAME_ID}`];

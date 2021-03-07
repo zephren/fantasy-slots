@@ -7,6 +7,8 @@ export type TileData = {
   highlight?: boolean;
 };
 
+export type TileMeta = { [key: string]: any };
+
 export type TileEffects = {
   shouldDestroy?: boolean;
 };
@@ -15,5 +17,6 @@ export type TileInstance = {
   id: string;
   config: TileConfig;
   data: TileData;
+  meta: TileMeta;
   effects: TileEffects;
 };

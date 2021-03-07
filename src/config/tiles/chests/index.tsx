@@ -1,11 +1,30 @@
-import { TileConfig } from "../../types/TileConfig";
-import { TileValueContext } from "../../types/TileValueContext";
+import { TileConfig } from "../../../types/TileConfig";
+import { TileValueContext } from "../../../types/TileValueContext";
 import { rarity } from "../rarities";
 import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
-import { TileInstance } from "../../types/TileInstance";
+import { TileInstance } from "../../../types/TileInstance";
 import { hasCategory } from "../lib/hasCategory";
-import { destroy } from "../lib/destroy";
+import { removeTile } from "../lib/removeTile";
 import { Chest1, Chest2, Chest3, Chest4, Coin, Key } from "../icons/Icon";
+
+function createChestConfig({ baseValue, removeValue }: any) {
+  return {
+    categories: ["chest"],
+    description: () => {
+      return (
+        <>
+          Unlocked by the key, gives {removeValue} <Coin />
+        </>
+      );
+    },
+    calculateValue: (context: TileValueContext) => {
+      return baseValue;
+    },
+    onRemove: (context: TileValueContext) => {
+      return { value: removeValue };
+    },
+  };
+}
 
 const tileConfigs: TileConfig[] = [
   {
@@ -23,17 +42,19 @@ const tileConfigs: TileConfig[] = [
     rarity: rarity.COMMON,
     categories: ["key"],
     calculateValue: (context: TileValueContext) => {
-      let destroyed = false;
+      let activated = false;
 
       iterateAdjacentTiles(context, (tile: TileInstance) => {
         if (hasCategory(tile, "chest")) {
-          destroy(tile, context);
-          destroyed = true;
+          // Remove the tile
+          removeTile(tile, context);
+          activated = true;
         }
       });
 
-      if (destroyed) {
-        destroy(context.tile, context);
+      if (activated) {
+        // Remove self
+        removeTile(context.tile, context);
       }
 
       return 1;
@@ -42,68 +63,31 @@ const tileConfigs: TileConfig[] = [
   {
     id: "834bf40d-0a3d-4e20-83a0-4e3aa233840c",
     name: "Small Chest",
-    description: () => {
-      return (
-        <>
-          Unlocked by the key, gives 10 <Coin />
-        </>
-      );
-    },
     icon: Chest1,
     rarity: rarity.COMMON,
-    categories: ["chest"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
-    onDestroy: (context: TileValueContext) => {
-      return 10;
-    },
+    ...createChestConfig({ baseValue: 1, removeValue: 10 }),
   },
   {
     id: "c87ea7e4-5479-4aa7-9033-0859d191390b",
     name: "Medium Chest",
-    description: () => {
-      return (
-        <>
-          Unlocked by the key, gives 30 <Coin />
-        </>
-      );
-    },
+
     icon: Chest2,
     rarity: rarity.UNCOMMON,
-    categories: ["chest"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
-    onDestroy: (context: TileValueContext) => {
-      return 30;
-    },
+    ...createChestConfig({ baseValue: 2, removeValue: 20 }),
   },
   {
     id: "8abbd4fc-1fee-4c14-b5c2-2a627de70dd1",
     name: "Large Chest",
     icon: Chest3,
     rarity: rarity.RARE,
-    categories: ["chest"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
-    onDestroy: (context: TileValueContext) => {
-      alert("destroyed");
-    },
+    ...createChestConfig({ baseValue: 3, removeValue: 30 }),
   },
   {
     id: "3422f3a8-bd1a-4549-a9ff-d0ed0621d646",
     name: "Dark Chest",
     icon: Chest4,
     rarity: rarity.LEGENDARY,
-    categories: ["chest"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
-    onDestroy: (context: TileValueContext) => {
-      alert("destroyed");
-    },
+    ...createChestConfig({ baseValue: 4, removeValue: 40 }),
   },
 ];
 
