@@ -15,6 +15,7 @@ export type GameData = {
   gridHeight: number;
   boardValue: number;
   totalCoins: number;
+  savedCoins: number;
   currentTaxPeriod: number;
   currentTaxPeriodDay: number;
   roundEnded: boolean;

@@ -9,6 +9,7 @@ export function newRound() {
   gameData.roundEnded = false;
   gameData.boardTiles = [];
   gameData.totalCoins = 0;
+  gameData.events = [];
 
   setInitialGameTiles();
   nextTaxPeriodDay();

@@ -12,25 +12,24 @@ import pickaxe from "./images/pickaxe.png";
 import rock from "./images/rock.png";
 import { store } from "../../../lib/store";
 import { createTile } from "../../../lib/createTile";
-import { getTileConfigByName } from "..";
+import { tileConfigsMap } from "..";
+import { TileConfig } from "../../../classes/TileConfig";
 
 const empty =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 interface Props {
   image?: any;
-  tileName?: string;
+  config?: TileConfig;
 }
 
-export function Icon({ image, tileName: name }: Props) {
+export function Icon({ image, config: tileConfig }: Props) {
   return (
     <img
       className="icon"
       src={image}
       alt=""
       onClick={() => {
-        const tileConfig = getTileConfigByName(name || "");
-
         if (tileConfig) {
           store.state.selectedTile = createTile(tileConfig);
           store.update();
@@ -40,17 +39,31 @@ export function Icon({ image, tileName: name }: Props) {
   );
 }
 
-export const Empty = () => <Icon image={empty} />;
+// Cache icon instances for faster reference
+// There is no need to create one for each new instance
+const iconCache = new Map<string, JSX.Element>();
 
-export const Key = () => <Icon image={key} tileName={"Key"} />;
-export const Chest1 = () => <Icon image={chest1} />;
-export const Chest2 = () => <Icon image={chest2} />;
-export const Chest3 = () => <Icon image={chest3} />;
-export const Chest4 = () => <Icon image={chest4} />;
+function getIcon(image: string, config: TileConfig) {
+  let icon = iconCache.get(config.name!);
 
-export const Coal = () => <Icon image={coal} tileName={"Coal"} />;
-export const Coin = () => <Icon image={coin} />;
-export const Dagger1 = () => <Icon image={dagger1} />;
+  if (!icon) {
+    icon = <Icon image={image} config={config} />;
+  }
 
-export const Pickaxe = () => <Icon image={pickaxe} tileName={"Pickaxe"} />;
-export const Rock = () => <Icon image={rock} tileName={"Rock"} />;
+  return icon;
+}
+
+export const Empty = () => getIcon(empty, tileConfigsMap.Empty);
+
+export const Key = () => getIcon(key, tileConfigsMap.Key);
+export const Chest1 = () => getIcon(chest1, tileConfigsMap.Small_Chest);
+export const Chest2 = () => getIcon(chest2, tileConfigsMap.Medium_Chest);
+export const Chest3 = () => getIcon(chest3, tileConfigsMap.Large_Chest);
+export const Chest4 = () => getIcon(chest4, tileConfigsMap.Dark_Chest);
+
+export const Coal = () => getIcon(coal, tileConfigsMap.Coal);
+export const Coin = () => getIcon(coin, tileConfigsMap.Coin);
+export const Dagger1 = () => getIcon(dagger1, tileConfigsMap.Dagger);
+
+export const Pickaxe = () => getIcon(pickaxe, tileConfigsMap.Pickaxe);
+export const Rock = () => getIcon(rock, tileConfigsMap.Rock);

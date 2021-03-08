@@ -1,4 +1,4 @@
-import { TileConfig } from "./TileConfig";
+import { TileConfig } from "../classes/TileConfig";
 
 export type TileData = {
   spinValue: number;

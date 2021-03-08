@@ -1,4 +1,4 @@
-import { TileConfig } from "../../../types/TileConfig";
+import { TileConfig } from "../../../classes/TileConfig";
 import { TileValueContext } from "../../../types/TileValueContext";
 import { rarity } from "../rarities";
 import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
@@ -7,13 +7,13 @@ import { hasCategory } from "../lib/hasCategory";
 import { removeTile } from "../lib/removeTile";
 import { Coal, Pickaxe, Rock } from "../icons/Icon";
 import { createTile } from "../../../lib/createTile";
-import { tilesByName } from "..";
+import { tileConfigsMap } from "..";
 import { addGameEvent } from "../../../lib/game";
 
-const tileConfigs: TileConfig[] = [
-  {
+const tileConfigs = {
+  Pickaxe: new TileConfig({
     id: "102f6200-dd6b-434f-b486-67ccc425cc4d",
-    name: "Pickaxe",
+    name: "",
     description: () => {
       return <>Breaks rocks, has 3 uses</>;
     },
@@ -53,10 +53,10 @@ const tileConfigs: TileConfig[] = [
 
       return 1;
     },
-  },
-  {
+  }),
+  Rock: new TileConfig({
     id: "89c89fb8-b343-4767-ba9f-78b4586b4ceb",
-    name: "Rock",
+    name: "",
     description: () => {
       return (
         <>
@@ -71,7 +71,7 @@ const tileConfigs: TileConfig[] = [
       return 1;
     },
     onRemove: (context: TileValueContext) => {
-      const newTile = createTile(tilesByName.get("Coal"));
+      const newTile = createTile(tileConfigsMap.Coal);
 
       addGameEvent({
         message: `A broken Rock yielded a ${newTile.config.name}`,
@@ -79,7 +79,7 @@ const tileConfigs: TileConfig[] = [
 
       return { tiles: [newTile] };
     },
-  },
-];
+  }),
+};
 
 export default tileConfigs;

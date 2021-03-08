@@ -10,6 +10,24 @@ tiles can have their own stats
   ex combining potions creates new potions that have some combination of the stats
 
 
+Once "Online"
+  Leaderboard
+    Highest roll
+    highest total
+
+Use Lerna
+  UI
+  Server
+  Game manager (will need a heavy refactor)
+
+Enable ply online and offline
+
+Could use Lambda and Dynamo for hosting
+  Game state stores in Dynamo
+  Lambda for roll > load state > process > save state > return result
+    Client can do the 
+
+
 
 
 TILE IDEAS

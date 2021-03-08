@@ -1,4 +1,4 @@
-import { getTileConfigByName } from "../config/tiles";
+import { getTileConfigByName, TileConfigNames } from "../config/tiles";
 import { GameData } from "../types/GameData";
 import {
   addDeckTile,
@@ -9,7 +9,7 @@ import {
 } from "./game";
 import { store } from "./store";
 
-function addTile(name: string) {
+function addTile(name: TileConfigNames) {
   const tileConfig = getTileConfigByName(name);
   addOwnedTile(tileConfig);
   addDeckTile(tileConfig?.id);
@@ -26,6 +26,7 @@ export function newGame() {
     gridHeight: 3,
     boardValue: 0,
     totalCoins: 0,
+    savedCoins: 0,
     currentTaxPeriod: 0,
     currentTaxPeriodDay: 0,
     roundEnded: false,
@@ -33,6 +34,7 @@ export function newGame() {
   };
 
   store.state.gameData = gameData;
+  store.state.tilesToPick = [];
 
   addTile("Coal");
   addTile("Dagger");

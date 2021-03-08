@@ -1,4 +1,4 @@
-import { TileConfig } from "../../../types/TileConfig";
+import { TileConfig } from "../../../classes/TileConfig";
 import { TileValueContext } from "../../../types/TileValueContext";
 import { rarity } from "../rarities";
 import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
@@ -10,6 +10,7 @@ import { Chest1, Chest2, Chest3, Chest4, Coin, Key } from "../icons/Icon";
 function createChestConfig({ baseValue, removeValue }: any) {
   return {
     categories: ["chest"],
+    name: "",
     description: () => {
       return (
         <>
@@ -26,10 +27,10 @@ function createChestConfig({ baseValue, removeValue }: any) {
   };
 }
 
-const tileConfigs: TileConfig[] = [
-  {
+const tileConfigs = {
+  Key: new TileConfig({
     id: "2ef31449-bf1d-4cee-8e93-e0665fb9942a",
-    name: "Key",
+    name: "",
     description: () => {
       return (
         <>
@@ -59,36 +60,31 @@ const tileConfigs: TileConfig[] = [
 
       return 1;
     },
-  },
-  {
+  }),
+  Small_Chest: new TileConfig({
     id: "834bf40d-0a3d-4e20-83a0-4e3aa233840c",
-    name: "Small Chest",
     icon: Chest1,
     rarity: rarity.COMMON,
     ...createChestConfig({ baseValue: 1, removeValue: 10 }),
-  },
-  {
+  }),
+  Medium_Chest: new TileConfig({
     id: "c87ea7e4-5479-4aa7-9033-0859d191390b",
-    name: "Medium Chest",
-
     icon: Chest2,
     rarity: rarity.UNCOMMON,
     ...createChestConfig({ baseValue: 2, removeValue: 20 }),
-  },
-  {
+  }),
+  Large_Chest: new TileConfig({
     id: "8abbd4fc-1fee-4c14-b5c2-2a627de70dd1",
-    name: "Large Chest",
     icon: Chest3,
     rarity: rarity.RARE,
     ...createChestConfig({ baseValue: 3, removeValue: 30 }),
-  },
-  {
+  }),
+  Dark_Chest: new TileConfig({
     id: "3422f3a8-bd1a-4549-a9ff-d0ed0621d646",
-    name: "Dark Chest",
     icon: Chest4,
     rarity: rarity.LEGENDARY,
     ...createChestConfig({ baseValue: 4, removeValue: 40 }),
-  },
-];
+  }),
+};
 
 export default tileConfigs;

@@ -1,4 +1,4 @@
-import { TileConfig } from "../types/TileConfig";
+import { TileConfig } from "../classes/TileConfig";
 import { TileData, TileInstance, TileMeta } from "../types/TileInstance";
 import { v4 as uuid } from "uuid";
 import { emptyTileConfig } from "../config/tiles";

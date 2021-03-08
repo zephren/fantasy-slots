@@ -7,6 +7,7 @@ import { store } from "./store";
 import { saveGameData } from "./saveGameData";
 import { taxPeriods } from "../config/taxPeriods";
 import { v4 as uuid } from "uuid";
+import { TileConfig } from "../classes/TileConfig";
 
 export function findTile(tiles: TileInstance[], id: string) {
   return tiles.find((tile) => {
@@ -14,7 +15,7 @@ export function findTile(tiles: TileInstance[], id: string) {
   });
 }
 
-export function addOwnedTile(tileConfig = emptyTileConfig) {
+export function addOwnedTile(tileConfig: TileConfig = emptyTileConfig) {
   const { ownedTiles } = store.state.gameData;
 
   if (findTile(ownedTiles, tileConfig.id)) {
@@ -316,7 +317,7 @@ function getTileChances(tiles: TileInstance[]) {
 function pickTiles(tiles: TileInstance[], count = 3) {
   const availableTiles = [...tiles];
   const pickedTiles = [];
-  console.log("Picking tiles");
+
   for (let i = 0; i < count; i++) {
     const { chances, chanceTotal } = getTileChances(availableTiles);
 
@@ -357,11 +358,15 @@ export function nextTaxPeriodDay() {
   if (gameData.currentTaxPeriodDay >= taxPeriod.totalDays) {
     gameData.currentTaxPeriod++;
     gameData.currentTaxPeriodDay = 1;
-    gameData.totalCoins -= taxPeriod.taxAmount;
 
-    if (gameData.totalCoins < 0) {
+    const newTotalCoins = gameData.totalCoins - taxPeriod.taxAmount;
+
+    if (newTotalCoins < 0) {
       gameData.roundEnded = true;
+      gameData.savedCoins += gameData.totalCoins;
     }
+
+    gameData.totalCoins = newTotalCoins;
   }
 
   store.update();
