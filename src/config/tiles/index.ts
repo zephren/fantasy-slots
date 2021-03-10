@@ -4,6 +4,7 @@ import { TileConfig } from "../../classes/TileConfig";
 import set1 from "./set1";
 import chests from "./chests";
 import mining from "./mining";
+import potions from "./potions";
 import empty from "./empty";
 import { TileInstance } from "../../types/TileInstance";
 import { createTile } from "../../lib/createTile";
@@ -14,6 +15,7 @@ export const tileConfigsMap = {
   ...empty,
   ...set1,
   ...mining,
+  ...potions,
   ...chests,
 };
 

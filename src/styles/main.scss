@@ -122,3 +122,27 @@ button {
     }
   }
 }
+
+.buy-new-card {
+  display: flex;
+
+  .rarity {
+    background: #111;
+    padding: 1em;
+    margin-right: 1em;
+
+    .name {
+      font-size: 1.5em;
+    }
+    .cost {
+      font-size: 2em;
+    }
+
+    .remaining-tiles {
+    }
+
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+}

@@ -10,6 +10,19 @@ import dagger1 from "./images/dagger1.png";
 
 import pickaxe from "./images/pickaxe.png";
 import rock from "./images/rock.png";
+
+import healthPotion1 from "./images/healthPotion1.png";
+import healthPotion2 from "./images/healthPotion2.png";
+import healthPotion3 from "./images/healthPotion3.png";
+
+import manaPotion1 from "./images/manaPotion1.png";
+import manaPotion2 from "./images/manaPotion2.png";
+import manaPotion3 from "./images/manaPotion3.png";
+
+import elixer1 from "./images/elixer1.png";
+import elixer2 from "./images/elixer2.png";
+import elixer3 from "./images/elixer3.png";
+
 import { store } from "../../../lib/store";
 import { createTile } from "../../../lib/createTile";
 import { tileConfigsMap } from "..";
@@ -67,3 +80,11 @@ export const Dagger1 = () => getIcon(dagger1, tileConfigsMap.Dagger);
 
 export const Pickaxe = () => getIcon(pickaxe, tileConfigsMap.Pickaxe);
 export const Rock = () => getIcon(rock, tileConfigsMap.Rock);
+
+export const HealthPotion1 = () =>
+  getIcon(healthPotion1, tileConfigsMap.Small_Health_Potion);
+
+export const ManaPotion1 = () =>
+  getIcon(manaPotion1, tileConfigsMap.Small_Mana_Potion);
+
+export const Elixer1 = () => getIcon(elixer1, tileConfigsMap.Small_Elixer);

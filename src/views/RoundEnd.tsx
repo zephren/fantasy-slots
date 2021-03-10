@@ -1,11 +1,11 @@
-import { TileConfig } from "../classes/TileConfig";
 import { Inventory } from "../components/Inventory";
-import { tileInstances } from "../config/tiles";
+import { emptyTileConfig, tileInstances } from "../config/tiles";
 import { rarity } from "../config/tiles/rarities";
 import { createTile } from "../lib/createTile";
-import { calculateDeckScore } from "../lib/game";
+import { addOwnedTile, calculateDeckScore, findTile } from "../lib/game";
 import { newRound } from "../lib/newRound";
 import { store } from "../lib/store";
+import { randomInt } from "../lib/utils";
 import { TileInstance } from "../types/TileInstance";
 
 export function RoundEnd() {
@@ -17,6 +17,57 @@ export function RoundEnd() {
     return Math.pow(rarityValue + 1, 2) * 100 * (rarityCount + 1);
   }
 
+  function getRemainingTiles() {
+    const availableTilesByRarity: TileInstance[][] = Object.keys(
+      rarity
+    ).map(() => []);
+    const allTilesByRarity: TileInstance[][] = Object.keys(
+      rarity
+    ).map(() => []);
+    const ownedRarityCounts: number[] = Object.keys(rarity).map(() => 0);
+
+    tileInstances.forEach((tile) => {
+      allTilesByRarity[tile.config.rarity].push(tile);
+
+      if (tile.config === emptyTileConfig) {
+        // Skip the empty tile
+        return;
+      }
+
+      if (!findTile(gameData.ownedTiles, tile.config.id)) {
+        availableTilesByRarity[tile.config.rarity].push(tile);
+      } else {
+        ownedRarityCounts[tile.config.rarity]++;
+      }
+    });
+
+    return {
+      availableTilesByRarity,
+      allTilesByRarity,
+      ownedRarityCounts,
+    };
+  }
+
+  function buyTileRarity(rarity: number) {
+    const { availableTilesByRarity, ownedRarityCounts } = getRemainingTiles();
+
+    const rarityTiles = availableTilesByRarity[rarity];
+
+    const index = randomInt(0, rarityTiles.length - 1);
+
+    gameData.savedCoins -= tileRarityCost(rarity, ownedRarityCounts[rarity]);
+
+    addOwnedTile(rarityTiles[index].config);
+
+    store.update();
+  }
+
+  const {
+    availableTilesByRarity,
+    allTilesByRarity,
+    ownedRarityCounts,
+  } = getRemainingTiles();
+
   return (
     <div>
       <h1>The round is over</h1>
@@ -26,24 +77,31 @@ export function RoundEnd() {
           This is your chance to get a new tile. Getting a new tile will
           increase the cost of the next tile of the same rarity
         </div>
-        <div>
-          {Object.keys(rarity).map((rarityName) => {
+        <div className="buy-new-card">
+          {Object.keys(rarity).map((rarityName, index) => {
             const rarityValue = (rarity as any)[rarityName];
-            const rarityCount = gameData.ownedTiles.reduce(
-              (acc: number, tile: TileInstance) => {
-                if (tile.config.rarity === rarityValue) {
-                  acc++;
-                }
+            const rarityCount = ownedRarityCounts[index];
+            const cost = tileRarityCost(rarityValue, rarityCount);
+            const availableTiles = availableTilesByRarity[index].length;
+            const className = ["rarity"];
+            let enabled = true;
 
-                return acc;
-              },
-              0
-            );
+            if (cost > gameData.savedCoins || availableTiles === 0) {
+              className.push("disabled");
+              enabled = false;
+            }
 
             return (
-              <div>
-                {rarityName}
-                <div>Cost: {tileRarityCost(rarityValue, rarityCount)}</div>
+              <div key={rarityValue} className={className.join(" ")}>
+                <div className="name">{rarityName}</div>
+                <div className="cost">{cost}</div>
+                <div className="remaining-tiles">
+                  {availableTilesByRarity[index].length} of{" "}
+                  {allTilesByRarity[index].length} tiles available
+                </div>
+                {enabled && (
+                  <button onClick={() => buyTileRarity(index)}>Buy</button>
+                )}
               </div>
             );
           })}
