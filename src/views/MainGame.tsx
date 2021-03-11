@@ -140,6 +140,16 @@ export function MainGame() {
           Save game data
         </button>
       </div>
+      <div>
+        <button
+          onClick={() => {
+            gameData.roundEnded = true;
+            store.update();
+          }}
+        >
+          End Round
+        </button>
+      </div>
     </div>
   );
 }

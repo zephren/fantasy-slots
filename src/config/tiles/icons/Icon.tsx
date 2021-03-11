@@ -83,8 +83,12 @@ export const Rock = () => getIcon(rock, tileConfigsMap.Rock);
 
 export const HealthPotion1 = () =>
   getIcon(healthPotion1, tileConfigsMap.Small_Health_Potion);
+export const HealthPotion2 = () =>
+  getIcon(healthPotion2, tileConfigsMap.Medium_Health_Potion);
 
 export const ManaPotion1 = () =>
   getIcon(manaPotion1, tileConfigsMap.Small_Mana_Potion);
+export const ManaPotion2 = () =>
+  getIcon(manaPotion2, tileConfigsMap.Medium_Mana_Potion);
 
 export const Elixer1 = () => getIcon(elixer1, tileConfigsMap.Small_Elixer);

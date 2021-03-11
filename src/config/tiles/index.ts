@@ -24,7 +24,7 @@ export type TileConfigNames = keyof typeof tileConfigsMap;
 // Update the names on all tileConfigs
 for (const tileName in tileConfigsMap) {
   const tileConfig = (tileConfigsMap as any)[tileName];
-  tileConfig.name = tileName;
+  tileConfig.name = tileName.replaceAll("_", " ");
 }
 
 const tileConfigs: TileConfig[] = [...Object.values(tileConfigsMap)];

@@ -1,15 +1,59 @@
 import { TileConfig } from "../../../classes/TileConfig";
-import { TileInstance } from "../../../types/TileInstance";
+import { createTile } from "../../../lib/createTile";
 import { TileValueContext } from "../../../types/TileValueContext";
+import { categories } from "../categories";
 import {
   HealthPotion1,
-  Coin,
-  Dagger1,
+  HealthPotion2,
   Elixer1,
   ManaPotion1,
+  ManaPotion2,
 } from "../icons/Icon";
-import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
+import { findAdjacent } from "../lib/findAdjacent";
+import { removeTile } from "../lib/removeTile";
+import { replaceTile } from "../lib/replaceTile";
 import { rarity } from "../rarities";
+
+function findAndRemoveMatch(category: string, context: TileValueContext) {
+  const foundTiles = findAdjacent(context, category);
+
+  if (foundTiles.length) {
+    console.log(foundTiles);
+    removeTile(foundTiles[0], context);
+    return true;
+  }
+
+  return false;
+}
+
+function createElixer(category: string, context: TileValueContext) {
+  const foundTiles = findAdjacent(context, category);
+
+  if (foundTiles.length) {
+    removeTile(foundTiles[0], context);
+    replaceTile(context.tile, createTile(tileConfigs.Small_Elixer), context);
+    return true;
+  }
+
+  return false;
+}
+
+function createNextPotion(
+  category: string,
+  nextConfig: TileConfig,
+  context: TileValueContext
+) {
+  const foundTiles = findAdjacent(context, category);
+  console.log();
+  if (foundTiles.length >= 2) {
+    removeTile(foundTiles[0], context);
+    removeTile(foundTiles[1], context);
+    replaceTile(context.tile, createTile(nextConfig), context);
+    return true;
+  }
+
+  return false;
+}
 
 const tileConfigs = {
   Small_Health_Potion: new TileConfig({
@@ -17,9 +61,33 @@ const tileConfigs = {
     name: "",
     icon: HealthPotion1,
     rarity: rarity.COMMON,
-    categories: [],
+    categories: [categories.SMALL_HEALTH_POTION],
     calculateValue: (context: TileValueContext) => {
+      if (createElixer(categories.SMALL_MANA_POTION, context)) {
+        return 0;
+      }
+
+      if (
+        createNextPotion(
+          categories.SMALL_HEALTH_POTION,
+          tileConfigs.Medium_Health_Potion,
+          context
+        )
+      ) {
+        return 0;
+      }
+
       return 1;
+    },
+  }),
+  Medium_Health_Potion: new TileConfig({
+    id: "c6d67a75-f151-4503-b04d-2fb535c06c92",
+    name: "",
+    icon: HealthPotion2,
+    rarity: rarity.UNCOMMON,
+    categories: [categories.MEDIUM_HEALTH_POTION],
+    calculateValue: (context: TileValueContext) => {
+      return 2;
     },
   }),
   Small_Mana_Potion: new TileConfig({
@@ -27,9 +95,32 @@ const tileConfigs = {
     name: "",
     icon: ManaPotion1,
     rarity: rarity.COMMON,
-    categories: [],
+    categories: [categories.SMALL_MANA_POTION],
     calculateValue: (context: TileValueContext) => {
+      if (createElixer(categories.SMALL_HEALTH_POTION, context)) {
+        return 0;
+      }
+
+      if (
+        createNextPotion(
+          categories.SMALL_MANA_POTION,
+          tileConfigs.Medium_Mana_Potion,
+          context
+        )
+      ) {
+        return 0;
+      }
       return 1;
+    },
+  }),
+  Medium_Mana_Potion: new TileConfig({
+    id: "6c067c0f-eefb-43ce-8f81-0aabd19cacc1",
+    name: "",
+    icon: ManaPotion2,
+    rarity: rarity.UNCOMMON,
+    categories: [categories.MEDIUM_MANA_POTION],
+    calculateValue: (context: TileValueContext) => {
+      return 2;
     },
   }),
   Small_Elixer: new TileConfig({
@@ -37,9 +128,9 @@ const tileConfigs = {
     name: "",
     icon: Elixer1,
     rarity: rarity.RARE,
-    categories: [],
+    categories: [categories.SMALL_ELIXER],
     calculateValue: (context: TileValueContext) => {
-      return 1;
+      return 5;
     },
   }),
 };
