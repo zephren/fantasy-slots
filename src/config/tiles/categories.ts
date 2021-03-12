@@ -5,4 +5,5 @@ export const categories = {
   SMALL_MANA_POTION: "small-mana-potion",
   MEDIUM_MANA_POTION: "medium-mana-potion",
   SMALL_ELIXER: "small-elixer",
+  MEDIUM_ELIXER: "medium-elixer",
 };

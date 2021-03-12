@@ -285,7 +285,10 @@ function getTiles(tileIndexes: number[]) {
   });
 }
 
-export function calculateBoardTileValue(tile: TileInstance, index: number) {
+export function calculateBoardTileValue(
+  tile: TileInstance,
+  boardIndex: number
+) {
   const { gameData } = store.state;
   const { gridWidth, gridHeight } = gameData;
 
@@ -293,7 +296,7 @@ export function calculateBoardTileValue(tile: TileInstance, index: number) {
     tile,
     gameData,
     getAdjacentIndexes: () => {
-      return getAdjacentIndexes(index, gridWidth, gridHeight);
+      return getAdjacentIndexes(boardIndex, gridWidth, gridHeight);
     },
     getTiles,
   };
@@ -326,12 +329,7 @@ function pickTiles(tiles: TileInstance[], count = 3) {
     const index = chances.findIndex((chance) => {
       return chance >= rand;
     });
-    console.log({
-      chances,
-      chanceTotal,
-      rand,
-      index,
-    });
+
     const tile = availableTiles.splice(index, 1)[0];
 
     if (tile) {
@@ -364,6 +362,7 @@ export function nextTaxPeriodDay() {
     if (newTotalCoins < 0) {
       gameData.roundEnded = true;
       gameData.savedCoins += gameData.totalCoins;
+      gameData.lastTotalCoins = gameData.totalCoins;
     }
 
     gameData.totalCoins = newTotalCoins;

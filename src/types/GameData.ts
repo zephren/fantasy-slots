@@ -15,7 +15,8 @@ export type GameData = {
   gridHeight: number;
   boardValue: number;
   totalCoins: number;
-  savedCoins: number;
+  savedCoins: number; // The number of coins saved as rounds end
+  lastTotalCoins: number; // The number of coins earned from the last round end
   currentTaxPeriod: number;
   currentTaxPeriodDay: number;
   roundEnded: boolean;

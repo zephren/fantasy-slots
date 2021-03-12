@@ -92,3 +92,4 @@ export const ManaPotion2 = () =>
   getIcon(manaPotion2, tileConfigsMap.Medium_Mana_Potion);
 
 export const Elixer1 = () => getIcon(elixer1, tileConfigsMap.Small_Elixer);
+export const Elixer2 = () => getIcon(elixer2, tileConfigsMap.Medium_Elixer);

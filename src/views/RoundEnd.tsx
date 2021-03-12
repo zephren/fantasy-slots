@@ -71,7 +71,10 @@ export function RoundEnd() {
   return (
     <div>
       <h1>The round is over</h1>
-      <h2>Saved Coins: {gameData.savedCoins}</h2>
+      <h2>
+        Saved Coins: {gameData.savedCoins} ({gameData.lastTotalCoins} earned
+        last round)
+      </h2>
       <div>
         <div>
           This is your chance to get a new tile. Getting a new tile will

@@ -6,6 +6,7 @@ import {
   HealthPotion1,
   HealthPotion2,
   Elixer1,
+  Elixer2,
   ManaPotion1,
   ManaPotion2,
 } from "../icons/Icon";
@@ -44,7 +45,7 @@ function createNextPotion(
   context: TileValueContext
 ) {
   const foundTiles = findAdjacent(context, category);
-  console.log();
+
   if (foundTiles.length >= 2) {
     removeTile(foundTiles[0], context);
     removeTile(foundTiles[1], context);
@@ -58,7 +59,6 @@ function createNextPotion(
 const tileConfigs = {
   Small_Health_Potion: new TileConfig({
     id: "e77dc97d-8d44-45e4-bbad-deb79574092d",
-    name: "",
     icon: HealthPotion1,
     rarity: rarity.COMMON,
     categories: [categories.SMALL_HEALTH_POTION],
@@ -82,7 +82,6 @@ const tileConfigs = {
   }),
   Medium_Health_Potion: new TileConfig({
     id: "c6d67a75-f151-4503-b04d-2fb535c06c92",
-    name: "",
     icon: HealthPotion2,
     rarity: rarity.UNCOMMON,
     categories: [categories.MEDIUM_HEALTH_POTION],
@@ -92,7 +91,6 @@ const tileConfigs = {
   }),
   Small_Mana_Potion: new TileConfig({
     id: "d587eba7-246e-46c7-bd55-2f32b0093cf8",
-    name: "",
     icon: ManaPotion1,
     rarity: rarity.COMMON,
     categories: [categories.SMALL_MANA_POTION],
@@ -110,12 +108,12 @@ const tileConfigs = {
       ) {
         return 0;
       }
+
       return 1;
     },
   }),
   Medium_Mana_Potion: new TileConfig({
     id: "6c067c0f-eefb-43ce-8f81-0aabd19cacc1",
-    name: "",
     icon: ManaPotion2,
     rarity: rarity.UNCOMMON,
     categories: [categories.MEDIUM_MANA_POTION],
@@ -125,12 +123,30 @@ const tileConfigs = {
   }),
   Small_Elixer: new TileConfig({
     id: "93a94d4e-7a9d-4d1a-9f8a-3b1586530ca0",
-    name: "",
     icon: Elixer1,
     rarity: rarity.RARE,
     categories: [categories.SMALL_ELIXER],
     calculateValue: (context: TileValueContext) => {
+      if (
+        createNextPotion(
+          categories.SMALL_ELIXER,
+          tileConfigs.Medium_Elixer,
+          context
+        )
+      ) {
+        return 0;
+      }
+
       return 5;
+    },
+  }),
+  Medium_Elixer: new TileConfig({
+    id: "1fb94f1d-880e-41eb-9a29-f14700a22928",
+    icon: Elixer2,
+    rarity: rarity.RARE,
+    categories: [categories.MEDIUM_ELIXER],
+    calculateValue: (context: TileValueContext) => {
+      return 10;
     },
   }),
 };

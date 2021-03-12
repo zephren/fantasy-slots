@@ -27,6 +27,7 @@ export function newGame() {
     boardValue: 0,
     totalCoins: 0,
     savedCoins: 0,
+    lastTotalCoins: 0,
     currentTaxPeriod: 0,
     currentTaxPeriodDay: 0,
     roundEnded: false,
