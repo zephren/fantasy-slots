@@ -5,7 +5,8 @@ import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
 import { TileInstance } from "../../../types/TileInstance";
 import { hasCategory } from "../lib/hasCategory";
 import { removeTile } from "../lib/removeTile";
-import { Chest1, Chest2, Chest3, Chest4, Coin, Key } from "../icons/Icon";
+import { Chest1, Chest2, Chest3, Chest4, Key } from "./icons";
+import { Coin } from "../misc/icons";
 
 function createChestConfig({ baseValue, removeValue }: any) {
   return {
@@ -34,8 +35,7 @@ const tileConfigs = {
     description: () => {
       return (
         <>
-          The key unlocks <Chest1 /> <Chest2 /> <Chest3 /> <Chest4 />,
-          destroying both in the process
+          The key unlocks <Chest1 /> <Chest2 /> <Chest3 /> <Chest4 />, destroying both in the process
         </>
       );
     },

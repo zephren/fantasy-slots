@@ -3,6 +3,7 @@ import { TileInstance } from "../types/TileInstance";
 import { GAME_ID } from "./static";
 import { store } from "./store";
 import tileConfigs, { emptyTileConfig } from "../config/tiles";
+import { updateGameData } from "./updateGameData";
 
 export function loadGameData() {
   let localData = localStorage[`${GAME_ID}`];
@@ -15,7 +16,7 @@ export function loadGameData() {
 
   if (localData?.gameState) {
     // Must update configs with references to the actual objects
-    const gameState: GameData = localData.gameState;
+    const gameState: GameData = updateGameData(localData.gameState);
 
     updateTileConfigs(gameState.ownedTiles);
     updateTileConfigs(gameState.deckTiles);

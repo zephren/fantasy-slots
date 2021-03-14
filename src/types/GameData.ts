@@ -5,7 +5,12 @@ export type GameEvent = {
   message: string;
 };
 
+export type GameDataFlags = {
+  introDismissed: boolean;
+};
+
 export type GameData = {
+  superUser: boolean; // Extra features for testing
   boardTiles: number[]; // Indexes of the game tile
   ownedTiles: TileInstance[]; // All tiles owned by playing the game (unique)
   deckTileIds: string[]; // Ids of the deck tiles
@@ -21,4 +26,6 @@ export type GameData = {
   currentTaxPeriodDay: number;
   roundEnded: boolean;
   events: GameEvent[];
+  modal: String; // The current modal to show
+  flags: GameDataFlags;
 };

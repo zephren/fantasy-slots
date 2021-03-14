@@ -113,9 +113,7 @@ export function generateBoard() {
 
   for (let i = 0; i < gridWidth * gridHeight; i++) {
     // Get a random index
-    const availableIndex = Math.floor(
-      Math.random() * availableGameTiles.length
-    );
+    const availableIndex = Math.floor(Math.random() * availableGameTiles.length);
     const gameTile = availableGameTiles[availableIndex];
     const index = gameTiles.indexOf(gameTile);
 
@@ -166,6 +164,7 @@ export function spin() {
       store.state.spinning = false;
       store.state.gameData.totalCoins += store.state.gameData.boardValue;
       store.state.tilesToPick = pickTiles(deckTiles);
+      store.state.gameData.modal = "PickNewTile";
       store.update();
 
       nextTaxPeriodDay();
@@ -204,12 +203,7 @@ export function processBoard() {
   });
 }
 
-export function isAdjacent(
-  originIndex: number,
-  checkIndex: number,
-  width: number,
-  height: number
-) {
+export function isAdjacent(originIndex: number, checkIndex: number, width: number, height: number) {
   // Up / Down or out of bounds
   if (checkIndex < 0 || checkIndex >= width * height) {
     return false;
@@ -223,27 +217,15 @@ export function isAdjacent(
   }
 
   // Down > Left / Right
-  if (
-    originIndex + width + 1 === checkIndex ||
-    originIndex + width - 1 === checkIndex
-  ) {
-    if (
-      Math.floor(checkIndex / width) !==
-      Math.floor((originIndex + width) / width)
-    ) {
+  if (originIndex + width + 1 === checkIndex || originIndex + width - 1 === checkIndex) {
+    if (Math.floor(checkIndex / width) !== Math.floor((originIndex + width) / width)) {
       return false;
     }
   }
 
   // Up > Left / Right
-  if (
-    originIndex - width + 1 === checkIndex ||
-    originIndex - width - 1 === checkIndex
-  ) {
-    if (
-      Math.floor(checkIndex / width) !==
-      Math.floor((originIndex - width) / width)
-    ) {
+  if (originIndex - width + 1 === checkIndex || originIndex - width - 1 === checkIndex) {
+    if (Math.floor(checkIndex / width) !== Math.floor((originIndex - width) / width)) {
       return false;
     }
   }
@@ -251,11 +233,7 @@ export function isAdjacent(
   return true;
 }
 
-export function getAdjacentIndexes(
-  startIndex: number,
-  width: number,
-  height: number
-): number[] {
+export function getAdjacentIndexes(startIndex: number, width: number, height: number): number[] {
   const indexes: number[] = [];
 
   indexes.push(startIndex + width);
@@ -285,10 +263,7 @@ function getTiles(tileIndexes: number[]) {
   });
 }
 
-export function calculateBoardTileValue(
-  tile: TileInstance,
-  boardIndex: number
-) {
+export function calculateBoardTileValue(tile: TileInstance, boardIndex: number) {
   const { gameData } = store.state;
   const { gridWidth, gridHeight } = gameData;
 

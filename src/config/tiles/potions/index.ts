@@ -2,14 +2,7 @@ import { TileConfig } from "../../../classes/TileConfig";
 import { createTile } from "../../../lib/createTile";
 import { TileValueContext } from "../../../types/TileValueContext";
 import { categories } from "../categories";
-import {
-  HealthPotion1,
-  HealthPotion2,
-  Elixer1,
-  Elixer2,
-  ManaPotion1,
-  ManaPotion2,
-} from "../icons/Icon";
+import { HealthPotion1, HealthPotion2, Elixer1, Elixer2, ManaPotion1, ManaPotion2 } from "./icons";
 import { findAdjacent } from "../lib/findAdjacent";
 import { removeTile } from "../lib/removeTile";
 import { replaceTile } from "../lib/replaceTile";
@@ -39,11 +32,7 @@ function createElixer(category: string, context: TileValueContext) {
   return false;
 }
 
-function createNextPotion(
-  category: string,
-  nextConfig: TileConfig,
-  context: TileValueContext
-) {
+function createNextPotion(category: string, nextConfig: TileConfig, context: TileValueContext) {
   const foundTiles = findAdjacent(context, category);
 
   if (foundTiles.length >= 2) {
@@ -67,13 +56,7 @@ const tileConfigs = {
         return 0;
       }
 
-      if (
-        createNextPotion(
-          categories.SMALL_HEALTH_POTION,
-          tileConfigs.Medium_Health_Potion,
-          context
-        )
-      ) {
+      if (createNextPotion(categories.SMALL_HEALTH_POTION, tileConfigs.Medium_Health_Potion, context)) {
         return 0;
       }
 
@@ -99,13 +82,7 @@ const tileConfigs = {
         return 0;
       }
 
-      if (
-        createNextPotion(
-          categories.SMALL_MANA_POTION,
-          tileConfigs.Medium_Mana_Potion,
-          context
-        )
-      ) {
+      if (createNextPotion(categories.SMALL_MANA_POTION, tileConfigs.Medium_Mana_Potion, context)) {
         return 0;
       }
 
@@ -127,13 +104,7 @@ const tileConfigs = {
     rarity: rarity.RARE,
     categories: [categories.SMALL_ELIXER],
     calculateValue: (context: TileValueContext) => {
-      if (
-        createNextPotion(
-          categories.SMALL_ELIXER,
-          tileConfigs.Medium_Elixer,
-          context
-        )
-      ) {
+      if (createNextPotion(categories.SMALL_ELIXER, tileConfigs.Medium_Elixer, context)) {
         return 0;
       }
 

@@ -1,6 +1,6 @@
 import { TileValueContext } from "../../../types/TileValueContext";
 import { rarity } from "../rarities";
-import { Empty } from "../icons/Icon";
+import { Empty } from "../Icon";
 import { TileConfig } from "../../../classes/TileConfig";
 
 const tileConfigs = {

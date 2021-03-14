@@ -27,6 +27,8 @@ Could use Lambda and Dynamo for hosting
   Lambda for roll > load state > process > save state > return result
     Client can do the 
 
+rarity as a background color for tiles
+
 
 
 

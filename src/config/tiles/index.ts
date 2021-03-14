@@ -1,7 +1,7 @@
 import { TileConfig } from "../../classes/TileConfig";
 
 // Sets
-import set1 from "./set1";
+import misc from "./misc";
 import chests from "./chests";
 import mining from "./mining";
 import potions from "./potions";
@@ -13,7 +13,7 @@ export const emptyTileConfig = empty.Empty;
 
 export const tileConfigsMap = {
   ...empty,
-  ...set1,
+  ...misc,
   ...mining,
   ...potions,
   ...chests,

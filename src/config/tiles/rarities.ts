@@ -5,4 +5,6 @@ export const rarity = {
   LEGENDARY: 3,
 };
 
+export const rarityNames = ["Common", "Uncommon", "Rare", "Legendary"];
+
 export const maxRarity = rarity.LEGENDARY;

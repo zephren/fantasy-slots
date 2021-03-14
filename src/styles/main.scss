@@ -5,10 +5,24 @@
   -webkit-user-drag: none;
   -moz-user-drag: none;
   user-drag: none;
+
+  padding: 0em;
+  margin: 0em;
 }
 
 body {
+  background: #111;
+}
+
+.main-container {
+  position: absolute;
+  top: 0em;
+  bottom: 0em;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 1em;
   background: #333;
+  overflow-y: auto;
 }
 
 .tile {
@@ -18,7 +32,7 @@ body {
   height: 5em;
 
   &.highlight {
-    background: #333;
+    background: #222;
   }
 
   .icon {
@@ -63,15 +77,23 @@ body {
     text-align: center;
   }
 
+  .rarity {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+
   .icon {
     width: 100%;
   }
 
   .description {
     font-size: 1.5em;
+    line-height: 1.5em;
 
     .icon {
       width: 1em;
+      vertical-align: middle;
     }
   }
 }
@@ -91,10 +113,18 @@ body {
 }
 
 .pick-a-tile {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 17em);
-  column-gap: 0.5em;
-  row-gap: 0.5em;
+  display: flex;
+  gap: 1em;
+
+  .option {
+    .tile-details {
+      flex-grow: 1;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 button {
@@ -103,6 +133,8 @@ button {
   border: 0em;
   font-size: 2em;
   cursor: pointer;
+  width: 100%;
+  outline: 0;
 }
 
 .icon-em {
@@ -143,6 +175,35 @@ button {
 
     &.disabled {
       opacity: 0.5;
+    }
+  }
+}
+
+.version {
+  position: absolute;
+  top: 0em;
+  right: 0em;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  .shade {
+    background: rgba(0, 0, 0, 0.85);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    .container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 75%;
+      padding: 1em;
+      background: #333;
+      box-shadow: 0em 0em 1em 0em #000;
     }
   }
 }

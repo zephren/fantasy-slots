@@ -1,3 +1,4 @@
+import { rarityNames } from "../config/tiles/rarities";
 import { TileInstance } from "../types/TileInstance";
 
 interface Props {
@@ -15,10 +16,9 @@ export function TileDetails({ tile, onClick }: Props) {
   return (
     <div className="tile-details" onClick={onClick}>
       <div className="name">{config.name}</div>
+      <div className="rarity">{rarityNames[config.rarity]}</div>
       <tile.config.icon />
-      <div className="description">
-        {config.description && config.description()}
-      </div>
+      <div className="description">{config.description && config.description()}</div>
     </div>
   );
 }
