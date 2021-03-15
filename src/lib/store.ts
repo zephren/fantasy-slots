@@ -5,7 +5,6 @@ export const store = {
   state: {
     gameData: (null as unknown) as GameData,
     spinning: false,
-    tilesToPick: [] as TileInstance[],
     selectedTile: (null as unknown) as TileInstance | undefined,
   },
   _update: (value: number) => {}, // The function that triggers an update

@@ -8,6 +8,7 @@ import { saveGameData } from "./saveGameData";
 import { taxPeriods } from "../config/taxPeriods";
 import { v4 as uuid } from "uuid";
 import { TileConfig } from "../classes/TileConfig";
+import { endRound } from "../actions/game";
 
 export function findTile(tiles: TileInstance[], id: string) {
   return tiles.find((tile) => {
@@ -163,7 +164,7 @@ export function spin() {
 
       store.state.spinning = false;
       store.state.gameData.totalCoins += store.state.gameData.boardValue;
-      store.state.tilesToPick = pickTiles(deckTiles);
+      store.state.gameData.tilesToPick = pickTiles(deckTiles);
       store.state.gameData.modal = "PickNewTile";
       store.update();
 
@@ -335,9 +336,7 @@ export function nextTaxPeriodDay() {
     const newTotalCoins = gameData.totalCoins - taxPeriod.taxAmount;
 
     if (newTotalCoins < 0) {
-      gameData.roundEnded = true;
-      gameData.savedCoins += gameData.totalCoins;
-      gameData.lastTotalCoins = gameData.totalCoins;
+      endRound();
     }
 
     gameData.totalCoins = newTotalCoins;

@@ -88,11 +88,11 @@ const tileConfigs = {
     calculateValue: (context: TileValueContext) => {
       let total = 1;
 
-      iterateAdjacentTiles(context, (tile: TileInstance) => {
-        if (tile.config.name === "Coal") {
-          total += 1;
-        }
-      });
+      // iterateAdjacentTiles(context, (tile: TileInstance) => {
+      //   if (tile.config.name === "Coal") {
+      //     total += 1;
+      //   }
+      // });
 
       return total;
     },

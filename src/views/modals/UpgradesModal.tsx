@@ -8,6 +8,7 @@ export function UpgradesModal() {
     <Modal>
       <h1>Upgrades</h1>
       <Upgrades />
+      <br />
       <button onClick={closeModal}>Close</button>
     </Modal>
   );

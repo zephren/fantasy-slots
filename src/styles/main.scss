@@ -20,9 +20,19 @@ body {
   bottom: 0em;
   left: 50%;
   transform: translate(-50%);
+  max-width: 75%;
   padding: 1em;
   background: #333;
   overflow-y: auto;
+}
+
+.icon-em,
+.text-icon {
+  .icon {
+    vertical-align: bottom;
+    font-size: inherit;
+    width: 1em;
+  }
 }
 
 .tile {
@@ -33,6 +43,10 @@ body {
 
   &.highlight {
     background: #222;
+  }
+
+  &.fade {
+    opacity: 0.25;
   }
 
   .icon {
@@ -128,21 +142,14 @@ body {
 }
 
 button {
-  color: #000;
-  background: #fff;
+  color: #fff;
+  background: rgb(107, 15, 110);
   border: 0em;
   font-size: 2em;
   cursor: pointer;
   width: 100%;
   outline: 0;
-}
-
-.icon-em {
-  .icon {
-    vertical-align: bottom;
-    font-size: inherit;
-    width: 1em;
-  }
+  padding: 0.25em 0em;
 }
 
 .game-events {
@@ -185,6 +192,7 @@ button {
   right: 0em;
   padding: 0.5em;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 100000;
 }
 
 .modal {

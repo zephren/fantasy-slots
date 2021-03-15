@@ -2,11 +2,12 @@ import { closeModal } from "../../actions/modal";
 import { Modal } from "../../components/Modal";
 import { TileDetails } from "../../components/TileDetails";
 import { addGameTile } from "../../lib/game";
+import { saveGameData } from "../../lib/saveGameData";
 import { store } from "../../lib/store";
 import { TileInstance } from "../../types/TileInstance";
 
 export function PickNewTileModal() {
-  const { tilesToPick } = store.state;
+  const { tilesToPick } = store.state.gameData;
 
   function pickTile(tile?: TileInstance) {
     if (tile) {
@@ -14,8 +15,9 @@ export function PickNewTileModal() {
     }
 
     store.state.gameData.modal = "";
-    store.state.tilesToPick = [];
-    store.state.gameData.boardTiles = [];
+    store.state.gameData.tilesToPick = [];
+
+    saveGameData();
 
     closeModal();
   }

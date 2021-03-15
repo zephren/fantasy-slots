@@ -27,6 +27,10 @@ export function updateGameData(gameData: any) {
     updateGameData.gameTiles = [];
   }
 
+  if (!updateGameData.tilesToPick) {
+    updateGameData.tilesToPick = [];
+  }
+
   if (!updateGameData.gridWidth) {
     updateGameData.gridWidth = 3;
   }

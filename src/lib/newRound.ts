@@ -10,11 +10,11 @@ export function newRound() {
   gameData.boardTiles = [];
   gameData.totalCoins = 0;
   gameData.events = [];
+  gameData.tilesToPick = [];
+  gameData.modal = "";
 
   setInitialGameTiles();
   nextTaxPeriodDay();
-
-  store.state.tilesToPick = [];
 
   store.update();
 }

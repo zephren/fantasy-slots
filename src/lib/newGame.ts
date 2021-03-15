@@ -14,7 +14,7 @@ export function newGame() {
   const gameData = updateGameData({});
 
   store.state.gameData = gameData;
-  store.state.tilesToPick = [];
+  store.state.gameData.tilesToPick = [];
 
   addTile("Coal");
   addTile("Pickaxe");

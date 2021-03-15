@@ -21,6 +21,7 @@ export function loadGameData() {
     updateTileConfigs(gameState.ownedTiles);
     updateTileConfigs(gameState.deckTiles);
     updateTileConfigs(gameState.gameTiles);
+    updateTileConfigs(gameState.tilesToPick);
 
     store.state.gameData = localData.gameState;
   }

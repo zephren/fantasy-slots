@@ -14,6 +14,8 @@ import { InventoryModal } from "./modals/InventoryModal";
 import { UpgradesModal } from "./modals/UpgradesModal";
 import { IntroModal } from "./modals/IntroModal";
 import { openModal } from "../actions/modal";
+import { endRound } from "../actions/game";
+import { TextIcon } from "../config/tiles/Icon";
 
 loadGameData();
 
@@ -34,38 +36,11 @@ function Header() {
         </span>{" "}
         taxes due in {taxPeriod.totalDays - gameData.currentTaxPeriodDay} Days
       </div>
-      <div>Day {gameData.currentTaxPeriod}</div>
-      <div>Saved Coins: {gameData.savedCoins}</div>
-    </>
-  );
-}
-
-function SelectedTile() {
-  return (
-    <>
-      {store.state.selectedTile && (
-        <div
-          style={{
-            position: "fixed",
-            top: "0em",
-            left: "0em",
-            zIndex: 1000000,
-            padding: "1em",
-            background: "#333",
-            boxShadow: "0em 0em 1em 0em #000",
-          }}
-        >
-          <TileDetails tile={store.state.selectedTile} />
-          <button
-            onClick={() => {
-              store.state.selectedTile = undefined;
-              store.update();
-            }}
-          >
-            Close
-          </button>
-        </div>
-      )}
+      <div style={{ float: "right" }}>Tax Period: {gameData.currentTaxPeriod}</div>
+      <div>
+        Saved: {gameData.savedCoins}
+        <TextIcon Icon={Coin} />
+      </div>
     </>
   );
 }
@@ -92,11 +67,11 @@ export function MainGame() {
     <div className="app">
       {!gameData.flags.introDismissed && <IntroModal />}
       <Modals />
-      <SelectedTile />
       <div className="version">Version: {packageJson.version}</div>
       <div className="main-container">
         <Header />
         <div>
+          <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Board
               boardTiles={gameData.boardTiles}
@@ -105,44 +80,48 @@ export function MainGame() {
               height={gameData.gridHeight}
             />
           </div>
-          <br />
-          {!store.state.spinning && <button onClick={spin}>Spin</button>}
-          <div style={{ fontSize: "2em" }}>
-            Board value: <b>{(!!gameData.boardValue && gameData.boardValue) || 0}</b>
+          <div style={{ fontSize: "2em", textAlign: "center" }}>
+            Board value {(!!gameData.boardValue && gameData.boardValue) || 0}
+            <TextIcon Icon={Coin} />
           </div>
+          {!store.state.spinning && (
+            <button onClick={spin} style={{ marginTop: "0.5em" }}>
+              Spin
+            </button>
+          )}
+          <div style={{ marginTop: "1em" }}>
+            <button onClick={() => openModal("Inventory")}>Inventory</button>
+            <button onClick={() => openModal("Upgrades")}>Upgrades</button>
+          </div>
+          <br />
         </div>
+        {!!gameData.events.length && (
+          <div>
+            <h1>Events</h1>
+            <GameEvents events={gameData.events} />
+            <br />
+          </div>
+        )}
         <div>
-          <h1>Events</h1>
-          <GameEvents events={gameData.events} />
+          <h1>Options</h1>
+          <button
+            onClick={() => {
+              newGame();
+              saveGameData();
+              store.update();
+            }}
+          >
+            Reset All Game Data
+          </button>
+          <button
+            onClick={() => {
+              saveGameData();
+            }}
+          >
+            Save Game Data
+          </button>
+          <button onClick={endRound}>End Round</button>
         </div>
-        <button onClick={() => openModal("Inventory")}>Inventory</button>
-        <button onClick={() => openModal("Upgrades")}>Upgrades</button>
-        <br />
-        <br />
-        <button
-          onClick={() => {
-            newGame();
-            saveGameData();
-            store.update();
-          }}
-        >
-          Reset all game data
-        </button>
-        <button
-          onClick={() => {
-            saveGameData();
-          }}
-        >
-          Save game data
-        </button>
-        <button
-          onClick={() => {
-            gameData.roundEnded = true;
-            store.update();
-          }}
-        >
-          End Round
-        </button>
       </div>
     </div>
   );

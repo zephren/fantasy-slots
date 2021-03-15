@@ -16,6 +16,7 @@ export function saveGameData() {
   replaceTileConfigs(gameState.ownedTiles);
   replaceTileConfigs(gameState.deckTiles);
   replaceTileConfigs(gameState.gameTiles);
+  replaceTileConfigs(gameState.tilesToPick);
 
   localData.gameState = gameState;
   localData.saveDate = new Date();

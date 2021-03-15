@@ -26,6 +26,14 @@ export function Icon({ image, config: tileConfig }: Props) {
   );
 }
 
+export function TextIcon({ Icon }: any) {
+  return (
+    <span className="text-icon">
+      <Icon />
+    </span>
+  );
+}
+
 // Cache icon instances for faster reference
 // There is no need to create one for each new instance
 const iconCache = new Map<string, JSX.Element>();

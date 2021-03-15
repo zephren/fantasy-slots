@@ -16,6 +16,7 @@ export type GameData = {
   deckTileIds: string[]; // Ids of the deck tiles
   deckTiles: TileInstance[]; // Tiles available to be played in the current game (unique)
   gameTiles: TileInstance[]; // Tiles created for the current game (multiples)
+  tilesToPick: TileInstance[];
   gridWidth: number;
   gridHeight: number;
   boardValue: number;
