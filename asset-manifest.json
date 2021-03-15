@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/fantasy-slots/static/css/main.16349f07.chunk.css",
-    "main.js": "/fantasy-slots/static/js/main.7460726b.chunk.js",
-    "main.js.map": "/fantasy-slots/static/js/main.7460726b.chunk.js.map",
+    "main.css": "/fantasy-slots/static/css/main.8aaa9414.chunk.css",
+    "main.js": "/fantasy-slots/static/js/main.81284e99.chunk.js",
+    "main.js.map": "/fantasy-slots/static/js/main.81284e99.chunk.js.map",
     "runtime-main.js": "/fantasy-slots/static/js/runtime-main.4a361c43.js",
     "runtime-main.js.map": "/fantasy-slots/static/js/runtime-main.4a361c43.js.map",
     "static/js/2.cd44a0ac.chunk.js": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js",
     "static/js/2.cd44a0ac.chunk.js.map": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.map",
     "index.html": "/fantasy-slots/index.html",
-    "static/css/main.16349f07.chunk.css.map": "/fantasy-slots/static/css/main.16349f07.chunk.css.map",
+    "static/css/main.8aaa9414.chunk.css.map": "/fantasy-slots/static/css/main.8aaa9414.chunk.css.map",
     "static/js/2.cd44a0ac.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.LICENSE.txt",
     "static/media/chest1.b4054229.png": "/fantasy-slots/static/media/chest1.b4054229.png",
     "static/media/chest2.d4ed67d0.png": "/fantasy-slots/static/media/chest2.d4ed67d0.png",
@@ -32,7 +32,7 @@
   "entrypoints": [
     "static/js/runtime-main.4a361c43.js",
     "static/js/2.cd44a0ac.chunk.js",
-    "static/css/main.16349f07.chunk.css",
-    "static/js/main.7460726b.chunk.js"
+    "static/css/main.8aaa9414.chunk.css",
+    "static/js/main.81284e99.chunk.js"
   ]
 }
