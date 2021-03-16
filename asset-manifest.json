@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/fantasy-slots/static/css/main.8aaa9414.chunk.css",
-    "main.js": "/fantasy-slots/static/js/main.81284e99.chunk.js",
-    "main.js.map": "/fantasy-slots/static/js/main.81284e99.chunk.js.map",
+    "main.css": "/fantasy-slots/static/css/main.eabafb74.chunk.css",
+    "main.js": "/fantasy-slots/static/js/main.522a1c0e.chunk.js",
+    "main.js.map": "/fantasy-slots/static/js/main.522a1c0e.chunk.js.map",
     "runtime-main.js": "/fantasy-slots/static/js/runtime-main.4a361c43.js",
     "runtime-main.js.map": "/fantasy-slots/static/js/runtime-main.4a361c43.js.map",
     "static/js/2.cd44a0ac.chunk.js": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js",
     "static/js/2.cd44a0ac.chunk.js.map": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.map",
     "index.html": "/fantasy-slots/index.html",
-    "static/css/main.8aaa9414.chunk.css.map": "/fantasy-slots/static/css/main.8aaa9414.chunk.css.map",
+    "static/css/main.eabafb74.chunk.css.map": "/fantasy-slots/static/css/main.eabafb74.chunk.css.map",
     "static/js/2.cd44a0ac.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.LICENSE.txt",
     "static/media/chest1.b4054229.png": "/fantasy-slots/static/media/chest1.b4054229.png",
     "static/media/chest2.d4ed67d0.png": "/fantasy-slots/static/media/chest2.d4ed67d0.png",
@@ -17,14 +17,19 @@
     "static/media/coin.3480412c.png": "/fantasy-slots/static/media/coin.3480412c.png",
     "static/media/elixer1.126eb52b.png": "/fantasy-slots/static/media/elixer1.126eb52b.png",
     "static/media/elixer2.f677e6cf.png": "/fantasy-slots/static/media/elixer2.f677e6cf.png",
+    "static/media/elixer3.ebf689aa.png": "/fantasy-slots/static/media/elixer3.ebf689aa.png",
     "static/media/healthPotion1.2cc42067.png": "/fantasy-slots/static/media/healthPotion1.2cc42067.png",
     "static/media/healthPotion2.8e645ab4.png": "/fantasy-slots/static/media/healthPotion2.8e645ab4.png",
+    "static/media/healthPotion3.e43eb7ea.png": "/fantasy-slots/static/media/healthPotion3.e43eb7ea.png",
     "static/media/key.0629d73b.png": "/fantasy-slots/static/media/key.0629d73b.png",
     "static/media/manaPotion1.03ef4a80.png": "/fantasy-slots/static/media/manaPotion1.03ef4a80.png",
     "static/media/manaPotion2.f6d761fd.png": "/fantasy-slots/static/media/manaPotion2.f6d761fd.png",
+    "static/media/manaPotion3.c6a0b4ff.png": "/fantasy-slots/static/media/manaPotion3.c6a0b4ff.png",
     "static/media/oreCoal.d3a30adc.png": "/fantasy-slots/static/media/oreCoal.d3a30adc.png",
     "static/media/oreCopper.ef951831.png": "/fantasy-slots/static/media/oreCopper.ef951831.png",
+    "static/media/oreGold.0a427c5c.png": "/fantasy-slots/static/media/oreGold.0a427c5c.png",
     "static/media/oreIron.45ad7af5.png": "/fantasy-slots/static/media/oreIron.45ad7af5.png",
+    "static/media/oreMithril.4a29a93f.png": "/fantasy-slots/static/media/oreMithril.4a29a93f.png",
     "static/media/oreSilver.3e3113ee.png": "/fantasy-slots/static/media/oreSilver.3e3113ee.png",
     "static/media/pickaxe.9f91b8f2.png": "/fantasy-slots/static/media/pickaxe.9f91b8f2.png",
     "static/media/rock.cffc8f04.png": "/fantasy-slots/static/media/rock.cffc8f04.png"
@@ -32,7 +37,7 @@
   "entrypoints": [
     "static/js/runtime-main.4a361c43.js",
     "static/js/2.cd44a0ac.chunk.js",
-    "static/css/main.8aaa9414.chunk.css",
-    "static/js/main.81284e99.chunk.js"
+    "static/css/main.eabafb74.chunk.css",
+    "static/js/main.522a1c0e.chunk.js"
   ]
 }
