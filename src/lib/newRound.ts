@@ -13,6 +13,8 @@ export function newRound() {
   gameData.tilesToPick = [];
   gameData.modal = "";
 
+  gameData.counters.totalRounds++;
+
   setInitialGameTiles();
   nextTaxPeriodDay();
 

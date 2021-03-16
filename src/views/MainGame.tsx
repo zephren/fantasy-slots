@@ -1,21 +1,18 @@
 import { Board } from "../components/Board";
 import { store } from "../lib/store";
-import { newGame } from "../lib/newGame";
 import { spin } from "../lib/game";
-import { TileDetails } from "../components/TileDetails";
 import { loadGameData } from "../lib/loadGameData";
 import { taxPeriods } from "../config/taxPeriods";
 import { Coin } from "../config/tiles/misc/icons";
 import { GameEvents } from "../components/GameEvents";
-import { saveGameData } from "../lib/saveGameData";
 import packageJson from "../../package.json";
 import { PickNewTileModal } from "./modals/PickNewTileModal";
 import { InventoryModal } from "./modals/InventoryModal";
 import { UpgradesModal } from "./modals/UpgradesModal";
 import { IntroModal } from "./modals/IntroModal";
 import { openModal } from "../actions/modal";
-import { endRound } from "../actions/game";
 import { TextIcon } from "../config/tiles/Icon";
+import { OptionsModal } from "./modals/OptionsModal";
 
 loadGameData();
 
@@ -55,6 +52,8 @@ function Modals() {
       return <InventoryModal />;
     case "Upgrades":
       return <UpgradesModal />;
+    case "Options":
+      return <OptionsModal />;
   }
 
   return null;
@@ -89,39 +88,26 @@ export function MainGame() {
               Spin
             </button>
           )}
-          <div style={{ marginTop: "1em" }}>
-            <button onClick={() => openModal("Inventory")}>Inventory</button>
-            <button onClick={() => openModal("Upgrades")}>Upgrades</button>
-          </div>
+          {gameData.counters.totalRounds > 0 && (
+            <div style={{ marginTop: "1em" }}>
+              <button onClick={() => openModal("Inventory")}>Inventory</button>
+              <button onClick={() => openModal("Upgrades")}>Upgrades</button>
+              <button onClick={() => openModal("Options")}>Options</button>
+            </div>
+          )}
           <br />
         </div>
-        {!!gameData.events.length && (
-          <div>
-            <h1>Events</h1>
-            <GameEvents events={gameData.events} />
-            <br />
-          </div>
+        {gameData.counters.totalRounds > 0 && (
+          <>
+            {!!gameData.events.length && (
+              <div>
+                <h1>Events</h1>
+                <GameEvents events={gameData.events} />
+                <br />
+              </div>
+            )}
+          </>
         )}
-        <div>
-          <h1>Options</h1>
-          <button
-            onClick={() => {
-              newGame();
-              saveGameData();
-              store.update();
-            }}
-          >
-            Reset All Game Data
-          </button>
-          <button
-            onClick={() => {
-              saveGameData();
-            }}
-          >
-            Save Game Data
-          </button>
-          <button onClick={endRound}>End Round</button>
-        </div>
       </div>
     </div>
   );

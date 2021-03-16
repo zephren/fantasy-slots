@@ -25,6 +25,7 @@ export function PickNewTileModal() {
   return (
     <Modal>
       <h1>Pick New Tile</h1>
+      <br />
       <div className="pick-a-tile">
         {tilesToPick.map((tile) => (
           <div className="option">

@@ -1,5 +1,4 @@
 import { getTileConfigByName, TileConfigNames } from "../config/tiles";
-import { GameData } from "../types/GameData";
 import { addDeckTile, addOwnedTile, buildDeck, nextTaxPeriodDay, setInitialGameTiles } from "./game";
 import { store } from "./store";
 import { updateGameData } from "./updateGameData";
@@ -19,9 +18,6 @@ export function newGame() {
   addTile("Coal");
   addTile("Pickaxe");
   addTile("Rock");
-  // addTile("Key");
-  // addTile("Small Chest");
-  // addTile("Medium Chest");
 
   buildDeck();
   setInitialGameTiles();

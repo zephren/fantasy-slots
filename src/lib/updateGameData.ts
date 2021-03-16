@@ -1,83 +1,31 @@
 import { GameData } from "../types/GameData";
 
 export function updateGameData(gameData: any) {
-  const updateGameData: GameData = gameData;
+  const d: GameData = gameData;
 
-  if (!updateGameData.superUser) {
-    updateGameData.superUser = false;
-  }
+  d.superUser = d.superUser ?? false;
+  d.boardTiles = d.boardTiles ?? [];
+  d.ownedTiles = d.ownedTiles ?? [];
+  d.deckTileIds = d.deckTileIds ?? [];
+  d.deckTiles = d.deckTiles ?? [];
+  d.gameTiles = d.gameTiles ?? [];
+  d.tilesToPick = d.tilesToPick ?? [];
+  d.gridWidth = d.gridWidth ?? 3;
+  d.gridHeight = d.gridHeight ?? 3;
+  d.boardValue = d.boardValue ?? 0;
+  d.totalCoins = d.totalCoins ?? 0;
+  d.savedCoins = d.savedCoins ?? 0;
+  d.lastTotalCoins = d.lastTotalCoins ?? 0;
+  d.currentTaxPeriod = d.currentTaxPeriod ?? 0;
+  d.currentTaxPeriodDay = d.currentTaxPeriodDay ?? 0;
+  d.roundEnded = d.roundEnded ?? false;
+  d.events = d.events ?? [];
+  d.modal = d.modal ?? "";
 
-  if (!updateGameData.boardTiles) {
-    updateGameData.boardTiles = [];
-  }
-
-  if (!updateGameData.ownedTiles) {
-    updateGameData.ownedTiles = [];
-  }
-
-  if (!updateGameData.deckTileIds) {
-    updateGameData.deckTileIds = [];
-  }
-
-  if (!updateGameData.deckTiles) {
-    updateGameData.deckTiles = [];
-  }
-
-  if (!updateGameData.gameTiles) {
-    updateGameData.gameTiles = [];
-  }
-
-  if (!updateGameData.tilesToPick) {
-    updateGameData.tilesToPick = [];
-  }
-
-  if (!updateGameData.gridWidth) {
-    updateGameData.gridWidth = 3;
-  }
-
-  if (!updateGameData.gridHeight) {
-    updateGameData.gridHeight = 3;
-  }
-
-  if (!updateGameData.boardValue) {
-    updateGameData.boardValue = 0;
-  }
-
-  if (!updateGameData.totalCoins) {
-    updateGameData.totalCoins = 0;
-  }
-
-  if (!updateGameData.savedCoins) {
-    updateGameData.savedCoins = 0;
-  }
-
-  if (!updateGameData.lastTotalCoins) {
-    updateGameData.lastTotalCoins = 0;
-  }
-
-  if (!updateGameData.currentTaxPeriod) {
-    updateGameData.currentTaxPeriod = 0;
-  }
-
-  if (!updateGameData.currentTaxPeriodDay) {
-    updateGameData.currentTaxPeriodDay = 0;
-  }
-
-  if (!updateGameData.roundEnded) {
-    updateGameData.roundEnded = false;
-  }
-
-  if (!updateGameData.events) {
-    updateGameData.events = [];
-  }
-
-  if (!updateGameData.modal) {
-    updateGameData.modal = "";
-  }
-
-  if (!updateGameData.flags) {
-    updateGameData.flags = {} as any;
-  }
+  /**
+   * Flags
+   */
+  if (!d.flags) d.flags = {} as any;
 
   // Should be find to leave flags that default to "false" as "undefined"
   // "true" defaults should definitely be initialized
@@ -85,5 +33,15 @@ export function updateGameData(gameData: any) {
   //   updateGameData.flags.introDismissed= false;
   // }
 
-  return updateGameData;
+  /**
+   * Counters
+   */
+  if (!d.counters) d.counters = {} as any;
+
+  const { counters } = d;
+
+  counters.totalSpins = counters.totalSpins ?? 0;
+  counters.totalRounds = counters.totalRounds ?? 0;
+
+  return d;
 }

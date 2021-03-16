@@ -2,23 +2,33 @@ import { TileConfig } from "../../../classes/TileConfig";
 import { createTile } from "../../../lib/createTile";
 import { TileValueContext } from "../../../types/TileValueContext";
 import { categories } from "../categories";
-import { HealthPotion1, HealthPotion2, Elixer1, Elixer2, ManaPotion1, ManaPotion2 } from "./icons";
+import {
+  HealthPotion1,
+  HealthPotion2,
+  Elixer1,
+  Elixer2,
+  ManaPotion1,
+  ManaPotion2,
+  Elixer3,
+  ManaPotion3,
+  HealthPotion3,
+} from "./icons";
 import { findAdjacent } from "../lib/findAdjacent";
 import { removeTile } from "../lib/removeTile";
 import { replaceTile } from "../lib/replaceTile";
 import { rarity } from "../rarities";
 
-function findAndRemoveMatch(category: string, context: TileValueContext) {
-  const foundTiles = findAdjacent(context, category);
+// function findAndRemoveMatch(category: string, context: TileValueContext) {
+//   const foundTiles = findAdjacent(context, category);
 
-  if (foundTiles.length) {
-    console.log(foundTiles);
-    removeTile(foundTiles[0], context);
-    return true;
-  }
+//   if (foundTiles.length) {
+//     console.log(foundTiles);
+//     removeTile(foundTiles[0], context);
+//     return true;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 function createElixer(category: string, context: TileValueContext) {
   const foundTiles = findAdjacent(context, category);
@@ -72,6 +82,15 @@ const tileConfigs = {
       return 2;
     },
   }),
+  Large_Health_Potion: new TileConfig({
+    id: "227d75ba-7310-4aed-8f39-cab15fb90e20",
+    icon: HealthPotion3,
+    rarity: rarity.RARE,
+    categories: [categories.LARGE_HEALTH_POTION],
+    calculateValue: (context: TileValueContext) => {
+      return 2;
+    },
+  }),
   Small_Mana_Potion: new TileConfig({
     id: "d587eba7-246e-46c7-bd55-2f32b0093cf8",
     icon: ManaPotion1,
@@ -98,6 +117,19 @@ const tileConfigs = {
       return 2;
     },
   }),
+  Large_Mana_Potion: new TileConfig({
+    id: "cf9a1a58-c4ee-4284-a504-fe442c34a8f0",
+    icon: ManaPotion3,
+    rarity: rarity.RARE,
+    categories: [categories.LARGE_MANA_POTION],
+    calculateValue: (context: TileValueContext) => {
+      return 2;
+    },
+  }),
+
+  /**
+   * Elixer
+   */
   Small_Elixer: new TileConfig({
     id: "93a94d4e-7a9d-4d1a-9f8a-3b1586530ca0",
     icon: Elixer1,
@@ -116,6 +148,15 @@ const tileConfigs = {
     icon: Elixer2,
     rarity: rarity.RARE,
     categories: [categories.MEDIUM_ELIXER],
+    calculateValue: (context: TileValueContext) => {
+      return 10;
+    },
+  }),
+  Large_Elixer: new TileConfig({
+    id: "3e5d71cf-0f07-4c87-a76b-b269172b0a17",
+    icon: Elixer3,
+    rarity: rarity.LEGENDARY,
+    categories: [categories.LARGE_ELIXER],
     calculateValue: (context: TileValueContext) => {
       return 10;
     },

@@ -5,7 +5,7 @@ import { iterateAdjacentTiles } from "../lib/iterateAdjacentTiles";
 import { TileInstance } from "../../../types/TileInstance";
 import { hasCategory } from "../lib/hasCategory";
 import { removeTile } from "../lib/removeTile";
-import { Coal, OreCopper, OreIron, OreSilver, Pickaxe, Rock } from "./icons";
+import { Coal, OreCopper, OreGold, OreIron, OreMithril, OreSilver, Pickaxe, Rock } from "./icons";
 import { createTile } from "../../../lib/createTile";
 import { tileConfigsMap } from "..";
 import { addGameEvent } from "../../../lib/game";
@@ -118,6 +118,24 @@ const tileConfigs = {
   Silver_Ore: new TileConfig({
     id: "7fa9e325-ca81-48cd-a7d5-8b1203354218",
     icon: OreSilver,
+    rarity: rarity.UNCOMMON,
+    categories: [],
+    calculateValue: (context: TileValueContext) => {
+      return 1;
+    },
+  }),
+  Gold_Ore: new TileConfig({
+    id: "5c65694c-aaea-4cf7-9387-ec81765ecaa9",
+    icon: OreGold,
+    rarity: rarity.UNCOMMON,
+    categories: [],
+    calculateValue: (context: TileValueContext) => {
+      return 1;
+    },
+  }),
+  Mithril_Ore: new TileConfig({
+    id: "adf11359-db8e-4afc-8fe3-1688a3f4fb31",
+    icon: OreMithril,
     rarity: rarity.UNCOMMON,
     categories: [],
     calculateValue: (context: TileValueContext) => {

@@ -9,6 +9,11 @@ export type GameDataFlags = {
   introDismissed: boolean;
 };
 
+export type GameDataCounters = {
+  totalSpins: number;
+  totalRounds: number;
+};
+
 export type GameData = {
   superUser: boolean; // Extra features for testing
   boardTiles: number[]; // Indexes of the game tile
@@ -29,4 +34,5 @@ export type GameData = {
   events: GameEvent[];
   modal: String; // The current modal to show
   flags: GameDataFlags;
+  counters: GameDataCounters;
 };

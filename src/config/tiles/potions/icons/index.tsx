@@ -15,9 +15,12 @@ import manaPotion3 from "./manaPotion3.png";
 // Icons
 export const HealthPotion1 = () => getIcon(healthPotion1, tileConfigsMap.Small_Health_Potion);
 export const HealthPotion2 = () => getIcon(healthPotion2, tileConfigsMap.Medium_Health_Potion);
+export const HealthPotion3 = () => getIcon(healthPotion3, tileConfigsMap.Large_Health_Potion);
 
 export const ManaPotion1 = () => getIcon(manaPotion1, tileConfigsMap.Small_Mana_Potion);
 export const ManaPotion2 = () => getIcon(manaPotion2, tileConfigsMap.Medium_Mana_Potion);
+export const ManaPotion3 = () => getIcon(manaPotion3, tileConfigsMap.Large_Mana_Potion);
 
 export const Elixer1 = () => getIcon(elixer1, tileConfigsMap.Small_Elixer);
 export const Elixer2 = () => getIcon(elixer2, tileConfigsMap.Medium_Elixer);
+export const Elixer3 = () => getIcon(elixer3, tileConfigsMap.Large_Elixer);

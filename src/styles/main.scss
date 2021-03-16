@@ -20,10 +20,10 @@ body {
   bottom: 0em;
   left: 50%;
   transform: translate(-50%);
-  max-width: 75%;
   padding: 1em;
   background: #333;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .icon-em,
@@ -128,6 +128,8 @@ body {
 
 .pick-a-tile {
   display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
   gap: 1em;
 
   .option {
@@ -164,6 +166,7 @@ button {
 
 .buy-new-card {
   display: flex;
+  flex-wrap: wrap;
 
   .rarity {
     background: #111;

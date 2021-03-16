@@ -147,17 +147,17 @@ export function RoundEnd() {
               return ownedTile.config.id === tile.config.id;
             });
           }}
-          // onClickTile={(tile) => {
-          //   if (gameData.superUser) {
-          //     const hasTile = gameData.ownedTiles.find((otherTile) => {
-          //       return otherTile.config.id === tile.config.id;
-          //     });
+          onClickTile={(tile) => {
+            if (gameData.superUser) {
+              const hasTile = gameData.ownedTiles.find((otherTile) => {
+                return otherTile.config.id === tile.config.id;
+              });
 
-          //     if (!hasTile) {
-          //       gameData.ownedTiles.push(createTile(tile.config));
-          //     }
-          //   }
-          // }}
+              if (!hasTile) {
+                gameData.ownedTiles.push(createTile(tile.config));
+              }
+            }
+          }}
         />
       </div>
       <br />

@@ -1,5 +1,3 @@
-import { GameEvent } from "../types/GameData";
-
 export function Modal({ children, style }: any) {
   console.log(children);
   return (
