@@ -63,105 +63,107 @@ export function RoundEnd() {
   const { availableTilesByRarity, allTilesByRarity, ownedRarityCounts } = getRemainingTiles();
 
   return (
-    <div className="main-container">
-      <h1>The round is over</h1>
-      <h2>
-        Saved: {gameData.savedCoins}
-        <TextIcon Icon={Coin} /> ({gameData.lastTotalCoins} earned last round)
-      </h2>
-      <div>
+    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+      <div className="main-container">
+        <h1>The round is over</h1>
+        <h2>
+          Saved: {gameData.savedCoins}
+          <TextIcon Icon={Coin} /> ({gameData.lastTotalCoins} earned last round)
+        </h2>
         <div>
-          This is your chance to get a new tile. Getting a new tile will increase the cost of the next tile of the same
-          rarity
-        </div>
-        <div className="buy-new-card">
-          {Object.keys(rarity).map((rarityName, index) => {
-            const rarityValue = (rarity as any)[rarityName];
-            const rarityCount = ownedRarityCounts[index];
-            const cost = tileRarityCost(rarityValue, rarityCount);
-            const availableTiles = availableTilesByRarity[index].length;
-            const className = ["rarity"];
-            let enabled = true;
+          <div>
+            This is your chance to get a new tile. Getting a new tile will increase the cost of the next tile of the
+            same rarity
+          </div>
+          <div className="buy-new-card">
+            {Object.keys(rarity).map((rarityName, index) => {
+              const rarityValue = (rarity as any)[rarityName];
+              const rarityCount = ownedRarityCounts[index];
+              const cost = tileRarityCost(rarityValue, rarityCount);
+              const availableTiles = availableTilesByRarity[index].length;
+              const className = ["rarity"];
+              let enabled = true;
 
-            if (cost > gameData.savedCoins || availableTiles === 0) {
-              className.push("disabled");
-              enabled = false;
-            }
+              if (cost > gameData.savedCoins || availableTiles === 0) {
+                className.push("disabled");
+                enabled = false;
+              }
 
-            return (
-              <div key={rarityValue} className={className.join(" ")}>
-                <div className="name">{rarityName}</div>
-                <div className="cost">{cost}</div>
-                <div className="remaining-tiles">
-                  {availableTilesByRarity[index].length} of {allTilesByRarity[index].length} tiles available
+              return (
+                <div key={rarityValue} className={className.join(" ")}>
+                  <div className="name">{rarityName}</div>
+                  <div className="cost">{cost}</div>
+                  <div className="remaining-tiles">
+                    {availableTilesByRarity[index].length} of {allTilesByRarity[index].length} tiles available
+                  </div>
+                  {enabled && <button onClick={() => buyTileRarity(index)}>Buy</button>}
                 </div>
-                {enabled && <button onClick={() => buyTileRarity(index)}>Buy</button>}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div>Take this time to reorganize your deck</div>
-      <br />
-      <div>
+        <div>Take this time to reorganize your deck</div>
+        <br />
         <div>
-          <h1>Deck</h1>
-          <div style={{ background: deckScore > 1 ? "red" : "none" }}>Deck Score: {deckScore.toFixed(2)}</div>
-          <Inventory
-            tiles={gameData.deckTiles}
-            onClickTile={(tile) => {
-              const index = gameData.deckTiles.indexOf(tile);
+          <div>
+            <h1>Deck</h1>
+            <div style={{ background: deckScore > 1 ? "red" : "none" }}>Deck Score: {deckScore.toFixed(2)}</div>
+            <Inventory
+              tiles={gameData.deckTiles}
+              onClickTile={(tile) => {
+                const index = gameData.deckTiles.indexOf(tile);
 
-              if (index >= 0) {
-                gameData.deckTiles.splice(index, 1);
+                if (index >= 0) {
+                  gameData.deckTiles.splice(index, 1);
+                }
+              }}
+            />
+          </div>
+        </div>
+        <br />
+        <div>
+          <div>
+            <h1>Owned Inventory</h1>
+            <Inventory
+              tiles={gameData.ownedTiles}
+              onClickTile={(tile) => {
+                const hasTile = gameData.deckTiles.find((otherTile) => {
+                  return otherTile.config.id === tile.config.id;
+                });
+
+                if (!hasTile) {
+                  gameData.deckTiles.push(tile);
+                }
+              }}
+            />
+          </div>
+        </div>
+        <br />
+        <div>
+          <h1>All Tiles</h1>
+          <Inventory
+            tiles={tileInstances}
+            fade={(tile) => {
+              return !!gameData.ownedTiles.find((ownedTile) => {
+                return ownedTile.config.id === tile.config.id;
+              });
+            }}
+            onClickTile={(tile) => {
+              if (gameData.superUser) {
+                const hasTile = gameData.ownedTiles.find((otherTile) => {
+                  return otherTile.config.id === tile.config.id;
+                });
+
+                if (!hasTile) {
+                  gameData.ownedTiles.push(createTile(tile.config));
+                }
               }
             }}
           />
         </div>
+        <br />
+        <button onClick={newRound}>Next round</button>
       </div>
-      <br />
-      <div>
-        <div>
-          <h1>Owned Inventory</h1>
-          <Inventory
-            tiles={gameData.ownedTiles}
-            onClickTile={(tile) => {
-              const hasTile = gameData.deckTiles.find((otherTile) => {
-                return otherTile.config.id === tile.config.id;
-              });
-
-              if (!hasTile) {
-                gameData.deckTiles.push(tile);
-              }
-            }}
-          />
-        </div>
-      </div>
-      <br />
-      <div>
-        <h1>All Tiles</h1>
-        <Inventory
-          tiles={tileInstances}
-          fade={(tile) => {
-            return !!gameData.ownedTiles.find((ownedTile) => {
-              return ownedTile.config.id === tile.config.id;
-            });
-          }}
-          onClickTile={(tile) => {
-            if (gameData.superUser) {
-              const hasTile = gameData.ownedTiles.find((otherTile) => {
-                return otherTile.config.id === tile.config.id;
-              });
-
-              if (!hasTile) {
-                gameData.ownedTiles.push(createTile(tile.config));
-              }
-            }
-          }}
-        />
-      </div>
-      <br />
-      <button onClick={newRound}>Next round</button>
     </div>
   );
 }

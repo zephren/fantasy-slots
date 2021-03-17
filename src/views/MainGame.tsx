@@ -63,52 +63,54 @@ export function MainGame() {
   const { gameData } = store.state;
 
   return (
-    <div className="app">
+    <>
       {!gameData.flags.introDismissed && <IntroModal />}
       <Modals />
-      <div className="version">Version: {packageJson.version}</div>
-      <div className="main-container">
-        <Header />
-        <div>
-          <br />
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Board
-              boardTiles={gameData.boardTiles}
-              gameTiles={gameData.gameTiles}
-              width={gameData.gridWidth}
-              height={gameData.gridHeight}
-            />
-          </div>
-          <div style={{ fontSize: "2em", textAlign: "center" }}>
-            Board value {(!!gameData.boardValue && gameData.boardValue) || 0}
-            <TextIcon Icon={Coin} />
-          </div>
-          {!store.state.spinning && (
-            <button onClick={spin} style={{ marginTop: "0.5em" }}>
-              Spin
-            </button>
-          )}
-          {gameData.counters.totalRounds > 0 && (
-            <div style={{ marginTop: "1em" }}>
-              <button onClick={() => openModal("Inventory")}>Inventory</button>
-              <button onClick={() => openModal("Upgrades")}>Upgrades</button>
-              <button onClick={() => openModal("Options")}>Options</button>
+      <div className="app" style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+        <div className="version">Version: {packageJson.version}</div>
+        <div className="main-container">
+          <Header />
+          <div>
+            <br />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Board
+                boardTiles={gameData.boardTiles}
+                gameTiles={gameData.gameTiles}
+                width={gameData.gridWidth}
+                height={gameData.gridHeight}
+              />
             </div>
-          )}
-          <br />
-        </div>
-        {gameData.counters.totalRounds > 0 && (
-          <>
-            {!!gameData.events.length && (
-              <div>
-                <h1>Events</h1>
-                <GameEvents events={gameData.events} />
-                <br />
+            <div style={{ fontSize: "2em", textAlign: "center" }}>
+              Board value {(!!gameData.boardValue && gameData.boardValue) || 0}
+              <TextIcon Icon={Coin} />
+            </div>
+            {!store.state.spinning && (
+              <button onClick={spin} style={{ marginTop: "0.5em" }}>
+                Spin
+              </button>
+            )}
+            {gameData.counters.totalRounds > 0 && (
+              <div style={{ marginTop: "1em" }}>
+                <button onClick={() => openModal("Inventory")}>Inventory</button>
+                <button onClick={() => openModal("Upgrades")}>Upgrades</button>
+                <button onClick={() => openModal("Options")}>Options</button>
               </div>
             )}
-          </>
-        )}
+            <br />
+          </div>
+          {gameData.counters.totalRounds > 0 && (
+            <>
+              {!!gameData.events.length && (
+                <div>
+                  <h1>Events</h1>
+                  <GameEvents events={gameData.events} />
+                  <br />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
