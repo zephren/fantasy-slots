@@ -12,8 +12,12 @@ export class TileConfig {
   icon: any;
   rarity: number = 0;
   categories: string[] = [];
+
+  // Optional, so it will be 0, but usage should use a !
+  baseValue?: number = 0;
+
   description?: () => any;
-  calculateValue: (context: TileValueContext) => number = (context) => {
+  calculateValue?: (context: TileValueContext) => number = (context) => {
     return 0;
   };
   onRemove?: (context: TileValueContext) => RemoveValue | void;

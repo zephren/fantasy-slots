@@ -19,9 +19,7 @@ function createChestConfig({ baseValue, removeValue }: any) {
         </>
       );
     },
-    calculateValue: (context: TileValueContext) => {
-      return baseValue;
-    },
+    baseValue,
     onRemove: (context: TileValueContext) => {
       return { value: removeValue };
     },
@@ -42,6 +40,7 @@ const tileConfigs = {
     icon: Key,
     rarity: rarity.COMMON,
     categories: ["key"],
+    baseValue: 1,
     calculateValue: (context: TileValueContext) => {
       let activated = false;
 
@@ -58,7 +57,7 @@ const tileConfigs = {
         removeTile(context.tile, context);
       }
 
-      return 1;
+      return 0;
     },
   }),
   Small_Chest: new TileConfig({

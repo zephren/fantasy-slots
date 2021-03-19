@@ -1,5 +1,4 @@
 import { TileConfig } from "../../../classes/TileConfig";
-import { TileValueContext } from "../../../types/TileValueContext";
 import { rarity } from "../rarities";
 import { Coin } from "./icons";
 
@@ -9,9 +8,7 @@ const tileConfigs = {
     icon: Coin,
     rarity: rarity.COMMON,
     categories: ["coin"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
 };
 

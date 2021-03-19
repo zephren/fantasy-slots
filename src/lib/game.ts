@@ -264,7 +264,11 @@ function getTiles(tileIndexes: number[]) {
   });
 }
 
-export function calculateBoardTileValue(tile: TileInstance, boardIndex: number) {
+export function calculateBoardTileValue(tile: TileInstance, boardIndex: number): number {
+  if (!tile.config.calculateValue) {
+    return tile.config.baseValue!;
+  }
+
   const { gameData } = store.state;
   const { gridWidth, gridHeight } = gameData;
 
@@ -277,7 +281,7 @@ export function calculateBoardTileValue(tile: TileInstance, boardIndex: number) 
     getTiles,
   };
 
-  return tile.config.calculateValue(context);
+  return tile.config.calculateValue(context) + tile.config.baseValue!;
 }
 
 function getTileChances(tiles: TileInstance[]) {

@@ -20,6 +20,7 @@ const tileConfigs = {
     icon: Pickaxe,
     rarity: rarity.COMMON,
     categories: ["mining"],
+    baseValue: 1,
     createMeta: () => {
       return { uses: 3 };
     },
@@ -51,7 +52,7 @@ const tileConfigs = {
         removeTile(context.tile, context);
       }
 
-      return 1;
+      return 0;
     },
   }),
   Rock: new TileConfig({
@@ -67,9 +68,7 @@ const tileConfigs = {
     icon: Rock,
     rarity: rarity.COMMON,
     categories: ["rock"],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
     onRemove: (context: TileValueContext) => {
       const newTile = createTile(tileConfigsMap.Coal);
 
@@ -85,8 +84,9 @@ const tileConfigs = {
     icon: Coal,
     rarity: rarity.COMMON,
     categories: [],
+    baseValue: 1,
     calculateValue: (context: TileValueContext) => {
-      let total = 1;
+      let total = 0;
 
       // iterateAdjacentTiles(context, (tile: TileInstance) => {
       //   if (tile.config.name === "Coal") {
@@ -102,45 +102,35 @@ const tileConfigs = {
     icon: OreCopper,
     rarity: rarity.COMMON,
     categories: [],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
   Iron_Ore: new TileConfig({
     id: "8df321a7-a16d-485e-9b41-aebe784350db",
     icon: OreIron,
     rarity: rarity.COMMON,
     categories: [],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
   Silver_Ore: new TileConfig({
     id: "7fa9e325-ca81-48cd-a7d5-8b1203354218",
     icon: OreSilver,
     rarity: rarity.UNCOMMON,
     categories: [],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
   Gold_Ore: new TileConfig({
     id: "5c65694c-aaea-4cf7-9387-ec81765ecaa9",
     icon: OreGold,
     rarity: rarity.UNCOMMON,
     categories: [],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
   Mithril_Ore: new TileConfig({
     id: "adf11359-db8e-4afc-8fe3-1688a3f4fb31",
     icon: OreMithril,
     rarity: rarity.UNCOMMON,
     categories: [],
-    calculateValue: (context: TileValueContext) => {
-      return 1;
-    },
+    baseValue: 1,
   }),
 };
 

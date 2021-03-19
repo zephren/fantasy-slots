@@ -68,7 +68,8 @@ export function RoundEnd() {
         <h1>The round is over</h1>
         <h2>
           Saved: {gameData.savedCoins}
-          <TextIcon Icon={Coin} /> ({gameData.lastTotalCoins} earned last round)
+          <TextIcon Icon={Coin} /> ({gameData.lastTotalCoins}
+          <TextIcon Icon={Coin} /> earned last round)
         </h2>
         <div>
           <div>
