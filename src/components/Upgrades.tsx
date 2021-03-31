@@ -1,3 +1,5 @@
+import { TextIcon } from "../config/tiles/Icon";
+import { Coin } from "../config/tiles/misc/icons";
 import { fillEmptyTiles } from "../lib/game";
 import { store } from "../lib/store";
 
@@ -5,8 +7,21 @@ const upgrades = [
   {
     id: "bbe17879-f3ee-47fc-9e76-2fa8cc0ebc0d",
     name: "Board Width",
+    description: () => {
+      return (
+        <>
+          desc in thing
+          <div className="shrink-buttons">
+            <button>-</button>
+            {store.state.gameData.gridWidth}
+            <button>+</button>
+          </div>
+        </>
+      );
+    },
     cost: () => {
-      return 0;
+      const { gameData } = store.state;
+      return Math.pow(10, gameData.gridWidth);
     },
     buy: () => {
       const { gameData } = store.state;
@@ -21,8 +36,10 @@ const upgrades = [
   {
     id: "1e0ab330-8ec9-4e41-933d-75251ffa5ee5",
     name: "Board Height",
+    description: () => <>desc</>,
     cost: () => {
-      return 0;
+      const { gameData } = store.state;
+      return Math.pow(10, gameData.gridHeight);
     },
     buy: () => {
       const { gameData } = store.state;
@@ -34,32 +51,55 @@ const upgrades = [
       return false;
     },
   },
-  {
-    id: "0245c559-dd55-4f93-a626-53cc06b17d42",
-    name: "XYZ",
-    cost: () => {
-      return 0;
-    },
-    buy: () => {},
-    isComplete: () => {
-      return false;
-    },
-  },
 ];
 
+function buyUpgrade(upgrade: any) {
+  const cost = upgrade.cost();
+
+  upgrade.buy();
+
+  store.state.gameData.savedCoins -= cost;
+  store.update();
+}
+
 export function Upgrades() {
+  const { gameData } = store.state;
+
   return (
-    <div className="upgrades">
-      {upgrades.map((upgrade) => {
-        return (
-          <div key={upgrade.id}>
-            <div>{upgrade.name}</div>
-            <div>
-              <button onClick={upgrade.buy}>Buy</button>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <table className="table upgrades">
+        <thead>
+          <tr>
+            <th>Information</th>
+            <th>Cost</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {upgrades.map((upgrade) => {
+            return (
+              <tr key={upgrade.id}>
+                <td>
+                  <div className="name">{upgrade.name}</div>
+                  <div className="description">
+                    <upgrade.description />
+                  </div>
+                </td>
+                <td>
+                  <div className="cost">
+                    {upgrade.cost()}
+                    <TextIcon Icon={Coin} />
+                  </div>
+                </td>
+                <td>
+                  {gameData.savedCoins > upgrade.cost() && <button onClick={() => buyUpgrade(upgrade)}>Buy</button>}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <h1>[MINI GRID HERE]</h1>
+    </>
   );
 }

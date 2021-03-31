@@ -8,32 +8,22 @@ import { TileDetails } from "./components/TileDetails";
 loadGameData();
 
 function SelectedTile() {
+  if (!store.state.selectedTile) {
+    return null;
+  }
+
   return (
-    <>
-      {store.state.selectedTile && (
-        <div
-          style={{
-            position: "fixed",
-            top: "0em",
-            left: "0em",
-            zIndex: 1000000,
-            padding: "1em",
-            background: "#333",
-            boxShadow: "0em 0em 1em 0em #000",
-          }}
-        >
-          <TileDetails tile={store.state.selectedTile} />
-          <button
-            onClick={() => {
-              store.state.selectedTile = undefined;
-              store.update();
-            }}
-          >
-            Close
-          </button>
-        </div>
-      )}
-    </>
+    <div className="selected-tile">
+      <TileDetails tile={store.state.selectedTile} />
+      <button
+        onClick={() => {
+          store.state.selectedTile = undefined;
+          store.update();
+        }}
+      >
+        Close
+      </button>
+    </div>
   );
 }
 

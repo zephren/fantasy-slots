@@ -14,6 +14,11 @@ export type GameDataCounters = {
   totalRounds: number;
 };
 
+export type GameSettings = {
+  shuffleAnimationOn: boolean;
+  boardScanSpeed: number;
+};
+
 export type GameData = {
   superUser: boolean; // Extra features for testing
   boardTiles: number[]; // Indexes of the game tile

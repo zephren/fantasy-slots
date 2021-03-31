@@ -46,6 +46,8 @@ function Modals() {
   const { gameData } = store.state;
 
   switch (gameData.modal) {
+    case "Intro":
+      return <IntroModal />;
     case "PickNewTile":
       return <PickNewTileModal />;
     case "Inventory":
@@ -64,7 +66,6 @@ export function MainGame() {
 
   return (
     <>
-      {!gameData.flags.introDismissed && <IntroModal />}
       <Modals />
       <div className="app" style={{ display: "flex", justifyContent: "center", height: "100%" }}>
         <div className="version">Version: {packageJson.version}</div>
@@ -85,15 +86,18 @@ export function MainGame() {
               <TextIcon Icon={Coin} />
             </div>
             {!store.state.spinning && (
-              <button onClick={spin} style={{ marginTop: "0.5em" }}>
-                Spin
-              </button>
-            )}
-            {gameData.counters.totalRounds > 0 && (
-              <div style={{ marginTop: "1em" }}>
-                <button onClick={() => openModal("Inventory")}>Inventory</button>
-                <button onClick={() => openModal("Upgrades")}>Upgrades</button>
-                <button onClick={() => openModal("Options")}>Options</button>
+              <div style={{ marginTop: "0.5em" }}>
+                <button onClick={spin}>Spin</button>
+                <div style={{ marginTop: "1em" }}>
+                  <button onClick={() => openModal("Inventory")}>Inventory</button>
+                  <button onClick={() => openModal("Intro")}>How To Play</button>
+                  {gameData.counters.totalRounds > 0 && (
+                    <div>
+                      <button onClick={() => openModal("Upgrades")}>Upgrades</button>
+                      <button onClick={() => openModal("Options")}>Options</button>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
             <br />

@@ -1,4 +1,5 @@
 import { Inventory } from "../components/Inventory";
+import { Upgrades } from "../components/Upgrades";
 import { emptyTileConfig, tileInstances } from "../config/tiles";
 import { TextIcon } from "../config/tiles/Icon";
 import { Coin } from "../config/tiles/misc/icons";
@@ -127,6 +128,11 @@ export function RoundEnd() {
             <h1>Owned Inventory</h1>
             <Inventory
               tiles={gameData.ownedTiles}
+              fade={(tile) => {
+                return !!gameData.deckTiles.find((deckTile) => {
+                  return deckTile.config.id === tile.config.id;
+                });
+              }}
               onClickTile={(tile) => {
                 const hasTile = gameData.deckTiles.find((otherTile) => {
                   return otherTile.config.id === tile.config.id;
@@ -139,29 +145,35 @@ export function RoundEnd() {
             />
           </div>
         </div>
-        <br />
-        <div>
-          <h1>All Tiles</h1>
-          <Inventory
-            tiles={tileInstances}
-            fade={(tile) => {
-              return !!gameData.ownedTiles.find((ownedTile) => {
-                return ownedTile.config.id === tile.config.id;
-              });
-            }}
-            onClickTile={(tile) => {
-              if (gameData.superUser) {
-                const hasTile = gameData.ownedTiles.find((otherTile) => {
-                  return otherTile.config.id === tile.config.id;
-                });
+        {gameData.superUser && (
+          <>
+            <br />
+            <div>
+              <h1>All Tiles</h1>
+              <Inventory
+                tiles={tileInstances}
+                fade={(tile) => {
+                  return !!gameData.ownedTiles.find((ownedTile) => {
+                    return ownedTile.config.id === tile.config.id;
+                  });
+                }}
+                onClickTile={(tile) => {
+                  if (gameData.superUser) {
+                    const hasTile = gameData.ownedTiles.find((otherTile) => {
+                      return otherTile.config.id === tile.config.id;
+                    });
 
-                if (!hasTile) {
-                  gameData.ownedTiles.push(createTile(tile.config));
-                }
-              }
-            }}
-          />
-        </div>
+                    if (!hasTile) {
+                      gameData.ownedTiles.push(createTile(tile.config));
+                    }
+                  }
+                }}
+              />
+            </div>
+          </>
+        )}
+        <h1>Upgrades</h1>
+        <Upgrades />
         <br />
         <button onClick={newRound}>Next round</button>
       </div>

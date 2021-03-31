@@ -182,6 +182,13 @@ button {
   }
 }
 
+.shrink-buttons {
+  button {
+    width: auto;
+    padding: 0.25em 1em;
+  }
+}
+
 .game-events {
   .event {
     background: #000;
@@ -242,10 +249,54 @@ button {
       left: 50%;
       top: 5%;
       margin: auto;
-      max-width: 90%;
+      max-width: 50em;
       padding: 1em;
       background: #333;
       box-shadow: 0em 0em 1em 0em #000;
     }
+  }
+}
+
+.selected-tile {
+  position: fixed;
+  top: 0em;
+  left: 0em;
+  z-index: 100000;
+  padding: 1em;
+  background: #333;
+  box-shadow: 0em 0em 1em 0em #000;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    &:nth-child(even) {
+      background: #222;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 0.5em;
+    }
+  }
+}
+
+.upgrades {
+  .name {
+    font-size: 1.5em;
+  }
+
+  .description {
+    opacity: 0.8;
+  }
+
+  .cost {
+    font-size: 1.5em;
   }
 }

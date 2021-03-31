@@ -130,17 +130,30 @@ export function generateBoard() {
 export function resetTiles() {
   const { gridWidth, gridHeight, gameTiles, boardTiles } = store.state.gameData;
 
+  if (!boardTiles.length) {
+    return;
+  }
+
   for (let i = 0; i < gridWidth * gridHeight; i++) {
     const tile = gameTiles[boardTiles[i]];
     tile.data.spinValue = 0;
   }
 }
 
-export function spin() {
+function shuffleArray(array: any[]) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+export async function spin() {
   const { gameData } = store.state;
   const { gridWidth, gridHeight, deckTiles } = gameData;
 
-  gameData.boardTiles = generateBoard();
+  const newBoardTiles = generateBoard();
 
   resetTiles();
   processBoard();
@@ -148,51 +161,89 @@ export function spin() {
   store.state.spinning = true;
   store.update();
 
-  let index = 0;
-  const interval = setInterval(() => {
-    const { boardTiles, gameTiles } = gameData;
+  const length = gridWidth * gridHeight;
+  let iterations = 10;
+  const tileIndexes = store.state.gameData.gameTiles.map((_, index) => index);
 
-    if (index > 0 && index <= gridWidth * gridHeight) {
-      const lastTile = gameTiles[boardTiles[index - 1]];
-      lastTile.data.highlight = false;
-    }
+  async function animateShuffle() {
+    return new Promise((resolve: any) => {
+      const shuffleInterval = setInterval(() => {
+        iterations--;
 
-    if (index > gridWidth * gridHeight) {
-      // Spin finished
+        if (iterations === 0) {
+          clearInterval(shuffleInterval);
+          resolve();
+        }
 
-      clearInterval(interval);
+        const randomTiles = [...tileIndexes];
+        shuffleArray(randomTiles);
 
-      store.state.spinning = false;
-      store.state.gameData.totalCoins += store.state.gameData.boardValue;
-      store.state.gameData.tilesToPick = pickTiles(deckTiles);
-      store.state.gameData.modal = "PickNewTile";
-      store.update();
+        for (let i = 0; i < length; i++) {
+          store.state.gameData.boardTiles[i] = randomTiles.pop()!;
+        }
+        console.log(store.state.gameData.boardTiles);
+        store.update();
+      }, 100);
+    });
+  }
 
-      nextTaxPeriodDay();
+  async function animateBoard() {
+    return new Promise((resolve: any) => {
+      let index = 0;
+      const interval = setInterval(() => {
+        const { boardTiles, gameTiles } = gameData;
 
-      saveGameData();
+        if (index > 0 && index <= gridWidth * gridHeight) {
+          const lastTile = gameTiles[boardTiles[index - 1]];
+          lastTile.data.highlight = false;
+        }
 
-      return;
-    }
+        if (index > gridWidth * gridHeight) {
+          // Spin finished
 
-    if (index < gridWidth * gridHeight) {
-      const tile = gameTiles[boardTiles[index]];
-      tile.data.highlight = true;
-      tile.data.totalAppearances++;
-      tile.data.spinValue = calculateBoardTileValue(tile, index);
-    }
+          clearInterval(interval);
 
-    index++;
+          store.state.spinning = false;
+          store.state.gameData.totalCoins += store.state.gameData.boardValue;
+          store.state.gameData.tilesToPick = pickTiles(deckTiles);
+          store.state.gameData.modal = "PickNewTile";
+          store.update();
 
-    let boardValue = 0;
+          nextTaxPeriodDay();
 
-    for (const boardTilesIndex of boardTiles) {
-      boardValue += gameTiles[boardTilesIndex].data.spinValue;
-    }
-    store.state.gameData.boardValue = boardValue;
+          saveGameData();
 
-    store.update();
-  }, 100);
+          resolve();
+
+          return;
+        }
+
+        if (index < gridWidth * gridHeight) {
+          const tile = gameTiles[boardTiles[index]];
+          tile.data.highlight = true;
+          tile.data.totalAppearances++;
+          tile.data.spinValue = calculateBoardTileValue(tile, index);
+        }
+
+        index++;
+
+        let boardValue = 0;
+
+        for (const boardTilesIndex of boardTiles) {
+          boardValue += gameTiles[boardTilesIndex].data.spinValue;
+        }
+        store.state.gameData.boardValue = boardValue;
+
+        store.update();
+      }, 100);
+    });
+  }
+
+  await animateShuffle();
+
+  gameData.boardTiles = newBoardTiles;
+
+  await animateBoard();
 }
 
 export function processBoard() {

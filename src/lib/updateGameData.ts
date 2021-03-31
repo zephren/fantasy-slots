@@ -20,7 +20,7 @@ export function updateGameData(gameData: any) {
   d.currentTaxPeriodDay = d.currentTaxPeriodDay ?? 0;
   d.roundEnded = d.roundEnded ?? false;
   d.events = d.events ?? [];
-  d.modal = d.modal ?? "";
+  d.modal = d.modal ?? "Intro";
 
   /**
    * Flags
