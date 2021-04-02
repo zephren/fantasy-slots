@@ -27,8 +27,10 @@ export type GameData = {
   deckTiles: TileInstance[]; // Tiles available to be played in the current game (unique)
   gameTiles: TileInstance[]; // Tiles created for the current game (multiples)
   tilesToPick: TileInstance[];
-  gridWidth: number;
-  gridHeight: number;
+  gridWidth: number; // The current width
+  gridHeight: number; // The current height
+  gridWidthMax: number; // The max width
+  gridHeightMax: number; // The max height
   boardValue: number;
   totalCoins: number;
   savedCoins: number; // The number of coins saved as rounds end

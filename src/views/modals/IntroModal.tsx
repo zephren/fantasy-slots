@@ -7,14 +7,17 @@ export function IntroModal() {
 
   return (
     <Modal>
-      <h1>Intro</h1>
+      <h1>How To Play</h1>
+      <br />
       <div>
         <h3>What Is This?</h3>
+        <br />
         This is a slot machine incremental game. Every spin will result in new tiles on the board. Depending on the
         tiles that appear, you will earn money or trigger other effects.
         <br />
         <br />
         <h3>Game Play</h3>
+        <br />
         You must pay taxes after a set number of days. The taxes due are subtracted from your total moneny at the end of
         the tax period. As you successfully pass tax periods, the periods become longer and the amount of taxes due
         becomes greater. If you do not have enough money to pay taxes, you will instead get to keep the final amount of

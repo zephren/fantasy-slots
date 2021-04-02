@@ -32,8 +32,6 @@ body {
 .main-container {
   top: 0em;
   bottom: 0em;
-  max-width: 90%;
-  padding: 1em;
   background: #333;
   overflow-y: auto;
   overflow-x: hidden;
@@ -132,8 +130,8 @@ body {
 
 .board {
   display: grid;
-  column-gap: 0.5em;
-  row-gap: 0em;
+  column-gap: 0.2em;
+  row-gap: 0.2em;
   /* tamplates filled out by the component */
 }
 
@@ -147,7 +145,7 @@ body {
 .pick-a-tile {
   display: flex;
   flex-wrap: wrap;
-  justify-items: center;
+  justify-content: center;
   gap: 1em;
 
   .option {
@@ -214,6 +212,11 @@ button {
     .name {
       font-size: 1.5em;
     }
+
+    .value {
+      font-size: 2em;
+    }
+
     .cost {
       font-size: 2em;
     }
@@ -278,6 +281,7 @@ button {
 
     th {
       text-align: left;
+      padding: 0.5em;
     }
 
     td {
@@ -298,5 +302,11 @@ button {
 
   .cost {
     font-size: 1.5em;
+    white-space: nowrap;
+  }
+
+  .stepper-value {
+    font-size: 2em;
+    padding: 0em 0.5em;
   }
 }

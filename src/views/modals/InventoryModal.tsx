@@ -15,19 +15,23 @@ export function InventoryModal() {
     <Modal style={{ width: "50em" }}>
       <div>
         <h1>Inventory</h1>
+        <br />
         <div>
-          <h1>Game Tiles</h1>
+          <h2>Game Tiles</h2>
+          <br />
           <Inventory tiles={gameData.gameTiles} />
         </div>
+        <br />
         <div>
-          <h1>Deck</h1>
+          <h2>Deck</h2>
+          <br />
           <div style={{ background: deckScore > 1 ? "red" : "none" }}>Deck Score: {deckScore.toFixed(2)}</div>
           <Inventory tiles={gameData.deckTiles} />
         </div>
-        <div>
+        {/* <div>
           <h1>Owned Inventory</h1>
           <Inventory tiles={gameData.ownedTiles} />
-        </div>
+        </div> */}
         {gameData.superUser && (
           <div>
             <h1>All Tiles</h1>

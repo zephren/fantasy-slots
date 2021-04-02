@@ -8,7 +8,6 @@ import { GameEvents } from "../components/GameEvents";
 import packageJson from "../../package.json";
 import { PickNewTileModal } from "./modals/PickNewTileModal";
 import { InventoryModal } from "./modals/InventoryModal";
-import { UpgradesModal } from "./modals/UpgradesModal";
 import { IntroModal } from "./modals/IntroModal";
 import { openModal } from "../actions/modal";
 import { TextIcon } from "../config/tiles/Icon";
@@ -52,8 +51,6 @@ function Modals() {
       return <PickNewTileModal />;
     case "Inventory":
       return <InventoryModal />;
-    case "Upgrades":
-      return <UpgradesModal />;
     case "Options":
       return <OptionsModal />;
   }
@@ -67,9 +64,9 @@ export function MainGame() {
   return (
     <>
       <Modals />
+      <div className="version">Version: {packageJson.version}</div>
       <div className="app" style={{ display: "flex", justifyContent: "center", height: "100%" }}>
-        <div className="version">Version: {packageJson.version}</div>
-        <div className="main-container">
+        <div className="main-container" style={{ padding: "1em" }}>
           <Header />
           <div>
             <br />
@@ -93,7 +90,6 @@ export function MainGame() {
                   <button onClick={() => openModal("Intro")}>How To Play</button>
                   {gameData.counters.totalRounds > 0 && (
                     <div>
-                      <button onClick={() => openModal("Upgrades")}>Upgrades</button>
                       <button onClick={() => openModal("Options")}>Options</button>
                     </div>
                   )}

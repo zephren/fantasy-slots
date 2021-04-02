@@ -12,6 +12,8 @@ export function updateGameData(gameData: any) {
   d.tilesToPick = d.tilesToPick ?? [];
   d.gridWidth = d.gridWidth ?? 3;
   d.gridHeight = d.gridHeight ?? 3;
+  d.gridWidthMax = d.gridWidthMax ?? 3;
+  d.gridHeightMax = d.gridHeightMax ?? 3;
   d.boardValue = d.boardValue ?? 0;
   d.totalCoins = d.totalCoins ?? 0;
   d.savedCoins = d.savedCoins ?? 0;
