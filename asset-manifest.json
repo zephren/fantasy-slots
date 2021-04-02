@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fantasy-slots/static/css/main.cf52c450.chunk.css",
-    "main.js": "/fantasy-slots/static/js/main.ba29d845.chunk.js",
-    "main.js.map": "/fantasy-slots/static/js/main.ba29d845.chunk.js.map",
+    "main.css": "/fantasy-slots/static/css/main.b6f730c6.chunk.css",
+    "main.js": "/fantasy-slots/static/js/main.677b19e7.chunk.js",
+    "main.js.map": "/fantasy-slots/static/js/main.677b19e7.chunk.js.map",
     "runtime-main.js": "/fantasy-slots/static/js/runtime-main.4a361c43.js",
     "runtime-main.js.map": "/fantasy-slots/static/js/runtime-main.4a361c43.js.map",
-    "static/js/2.cd44a0ac.chunk.js": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js",
-    "static/js/2.cd44a0ac.chunk.js.map": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.map",
+    "static/js/2.80d1bc0d.chunk.js": "/fantasy-slots/static/js/2.80d1bc0d.chunk.js",
+    "static/js/2.80d1bc0d.chunk.js.map": "/fantasy-slots/static/js/2.80d1bc0d.chunk.js.map",
     "index.html": "/fantasy-slots/index.html",
-    "static/css/main.cf52c450.chunk.css.map": "/fantasy-slots/static/css/main.cf52c450.chunk.css.map",
-    "static/js/2.cd44a0ac.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.cd44a0ac.chunk.js.LICENSE.txt",
+    "static/css/main.b6f730c6.chunk.css.map": "/fantasy-slots/static/css/main.b6f730c6.chunk.css.map",
+    "static/js/2.80d1bc0d.chunk.js.LICENSE.txt": "/fantasy-slots/static/js/2.80d1bc0d.chunk.js.LICENSE.txt",
     "static/media/chest1.b4054229.png": "/fantasy-slots/static/media/chest1.b4054229.png",
     "static/media/chest2.d4ed67d0.png": "/fantasy-slots/static/media/chest2.d4ed67d0.png",
     "static/media/chest3.888bf5be.png": "/fantasy-slots/static/media/chest3.888bf5be.png",
@@ -36,8 +36,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.4a361c43.js",
-    "static/js/2.cd44a0ac.chunk.js",
-    "static/css/main.cf52c450.chunk.css",
-    "static/js/main.ba29d845.chunk.js"
+    "static/js/2.80d1bc0d.chunk.js",
+    "static/css/main.b6f730c6.chunk.css",
+    "static/js/main.677b19e7.chunk.js"
   ]
 }
